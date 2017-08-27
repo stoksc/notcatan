@@ -1,4 +1,4 @@
-### System Requirements Specifications
+### Software Requirements Specifications
 
 ## Functional Requirements
 * Standards

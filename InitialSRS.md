@@ -12,6 +12,6 @@
   - create graphical assets to represent all previously defined objects representing game elements
 
 ## Non-Functional Requirements
-* add a start menu for the user to reload their gameWorld
+* Add a start menu for the user to reload their gameWorld
 * GUI Requirements
   - add animation to enhance user experience and signify the action was accepted clearly (possibly add sound)

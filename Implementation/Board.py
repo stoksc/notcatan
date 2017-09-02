@@ -3,7 +3,10 @@ This class is an amalgation of tiles, edges and vertices to represent the board.
 no one knows.
 """
 
+# local imports
 from Implementation import Tile
+from Implementation import Edge
+from Implementation import Vertex
 
 
 class Board:
@@ -16,7 +19,9 @@ class Board:
             [Tile.Tile() for x in range(4)],
             [Tile.Tile() for x in range(3)],
         ]
+
         self.connect_tiles()
+        self.add_edges_and_vertices()
 
     def connect_tiles(self):
         for i, row in self.tile_array:
@@ -52,23 +57,28 @@ class Board:
                         tile.t2 = self.tile_array[i][j+1]
                         self.tile_array[i][j+1].t5 = tile
 
+    def add_edges_and_vertices(self):
+        """
+        Either pure gold or pure garbage. Not sure yet.
+        Need to figure out how to set edge's tiles and vertex's tile, but this needs to sit
+        for a day for me to think about my first statement.
+        """
+        for row in self.tile_array:
+            for tile in row:
+                for index, edge in tile.edge_arr:
+                    edge = Edge.Edge()
+                    tile.vertex_arr[index%6] = Vertex.Vertex()
+                    if tile.tile_arr[index] != None:
+                        tile.tile_arr[index].edge_arr[(index + 3)%6] = edge
+                        if tile.tile_arr[index-1] != None:
+                            tile.tile_arr[index].vertex_arr[(index + 3)%6] = tile.vertex_arr[index%6]
+                            tile.tile_arr[index].vertex_arr[(index + 2)%6] = tile.vertex_arr[index%6]
+
     def is_valid_coordinate(self, x, y):
-        if x == 0 or x == 4:
-            if 0 <= y <= 2:
-                return True
-            else:
-                return False
-        elif x == 1 or x == 3:
-            if 0 <= y <= 3:
-                return True
-            else:
-                return False
-        elif x == 2:
-            if 0 <= y <= 4:
-                return True
-            else:
-                return False
-        else:
+        try:
+            self.tile_array[x][y]
+            return True
+        except IndexError:
             return False
 
 

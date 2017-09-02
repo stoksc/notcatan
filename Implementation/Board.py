@@ -13,11 +13,11 @@ class Board:
 
     def __init__(self):
         self.tile_array = [
-            [Tile.Tile() for x in range(3)],
-            [Tile.Tile() for x in range(4)],
-            [Tile.Tile() for x in range(5)],
-            [Tile.Tile() for x in range(4)],
-            [Tile.Tile() for x in range(3)],
+            [Tile.Tile() for _ in range(3)],
+            [Tile.Tile() for _ in range(4)],
+            [Tile.Tile() for _ in range(5)],
+            [Tile.Tile() for _ in range(4)],
+            [Tile.Tile() for _ in range(3)],
         ]
 
         self.connect_tiles()
@@ -52,7 +52,7 @@ class Board:
                     tile.t1 = self.tile_array[i-1][j+1]
                     self.tile_array[i-1][j+1].t4 = tile
                     # check if valid coordinate
-                    if self.is_valid_coordinate(i,j+1):
+                    if self.is_valid_coordinate(i, j+1):
                         # connect neighbor at 90 degrees and connect neighbor back
                         tile.t2 = self.tile_array[i][j+1]
                         self.tile_array[i][j+1].t5 = tile
@@ -67,12 +67,12 @@ class Board:
             for tile in row:
                 for index, edge in tile.edge_arr:
                     edge = Edge.Edge()
-                    tile.vertex_arr[index%6] = Vertex.Vertex()
-                    if tile.tile_arr[index] != None:
-                        tile.tile_arr[index].edge_arr[(index + 3)%6] = edge
-                        if tile.tile_arr[index-1] != None:
-                            tile.tile_arr[index].vertex_arr[(index + 3)%6] = tile.vertex_arr[index%6]
-                            tile.tile_arr[index].vertex_arr[(index + 2)%6] = tile.vertex_arr[index%6]
+                    tile.vertex_arr[index % 6] = Vertex.Vertex()
+                    if tile.tile_arr[index] is not None:
+                        tile.tile_arr[index].edge_arr[(index + 3) % 6] = edge
+                        if tile.tile_arr[index-1] is not None:
+                            tile.tile_arr[index].vertex_arr[(index + 3) % 6] = tile.vertex_arr[index % 6]
+                            tile.tile_arr[index].vertex_arr[(index + 2) % 6] = tile.vertex_arr[index % 6]
 
     def is_valid_coordinate(self, x, y):
         try:
@@ -80,5 +80,3 @@ class Board:
             return True
         except IndexError:
             return False
-
-

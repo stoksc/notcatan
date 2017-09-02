@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64b82d2b-af78-4093-85e5-a8baa29bbd40" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Implementation/Tile.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/Implementation/Board.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="901">
-              <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
+              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -308,6 +307,14 @@
       <option name="presentableId" value="Default" />
       <updated>1503066498611</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added the Board, Constants, Edge, Inventory, Player, Tile and Vertex classes. Work in progress.">
+      <created>1504387445131</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1504387445131</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -345,6 +352,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added the Board, Constants, Edge, Inventory, Player, Tile and Vertex classes. Work in progress." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the Board, Constants, Edge, Inventory, Player, Tile and Vertex classes. Work in progress." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -412,7 +423,7 @@
     <entry file="file://$PROJECT_DIR$/Implementation/Board.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="901">
-          <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding />
         </state>
       </provider>

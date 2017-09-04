@@ -7,6 +7,38 @@ from Implementation import Constants
 
 
 class Inventory:
+    """
+    Think about placing the resources in an array with references to the index as dictionary e.g.:
+    self.resources_arr = [self.b, self.l, self.w, self.g, self.o]
+    This way we can make a dictionary referring to the object that needs to be built and when passed
+    to the add_object method subtract from the array of resources based on the dictionary reference passed
+    to the method e.g.:
+
+    def add_object(self, self.resources_arr, object_to_add):
+        if object_to_add == ROAD:
+            if has_road(self):
+                self.resources_arr[self.b] = self.resources_arr[self.b -1]
+                self.resources_arr[self.l] = self.resources_arr[self.l -1]
+                self.roads.append(road)
+        if object_to_add == SETTLEMENT:
+            if has_settlement(self):
+                self.resources_arr[self.b] = self.resources_arr[self.b -1]
+                self.resources_arr[self.l] = self.resources_arr[self.l -1]
+                self.resources_arr[self.w] = self.resources_arr[self.w -1]
+                self.resources_arr[self.g] = self.resources_arr[self.g -1]
+                self.settlesments.append(settlement)
+        if object_to_add == CITY:
+            if has_city(self):
+                self.resources_arr[self.g] = self.resources_arr[self.g -2]
+                self.resources_arr[self.o] = self.resources_arr[self.o -3]
+        if object_to_add == DEV_CARD:
+            if has_dev_card(self):
+                self.resources_arr[arr.w] = self.resources_arr[self.w -1]
+                self.resources_arr[arr.g] = self.resources_arr[self.g -1]
+                self.resources_arr[arr.o] = self.resources_arr[self.o -1]
+                self.dev_cards.append(dev_card)
+
+    """
     def __init__(self):
         # player resources
         self.brick = 0

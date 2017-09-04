@@ -54,16 +54,13 @@ In Board.py
 
 """quotes""" are for docstrings, not comments. Don't comment huge blocks of code and leave it there, it'll all start to get way too messy way too fast. I set a bad example with what I did with the docstring in board.
 
-##### To comment things, do this:
-> \# this is a comment.
-
-e.g. in connect\_edges\_and\_vertices, in board.
-
-
 ##### To mark something as needing to be done, do this:
 > \# TODO: this needs to be done
 
 e.g. in place_road, in player.
 
+##### Instead of adding a bunch of verbose stuff, just put:
+
+> \# TODO: discuss ideas in XXXXXX.md commit doc.
 
 I also made a slack and a kanban for us. 

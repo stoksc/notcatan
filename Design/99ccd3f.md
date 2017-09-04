@@ -51,6 +51,9 @@ In Board.py
         like you to walk me through the logic of this code when you get a chance before making any
         modifications and possibly derping it up.
         
+___        
+
+##### Notes:
 
 """quotes""" are for docstrings, not comments. Don't comment huge blocks of code and leave it there, it'll all start to get way too messy way too fast. I set a bad example with what I did with the docstring in board.
 

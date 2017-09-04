@@ -58,20 +58,6 @@ class Board:
                         self.tile_array[i][j+1].t5 = tile
 
     def add_edges_and_vertices(self):
-        """
-        Either pure gold or pure garbage. Not sure yet.
-        Need to figure out how to set edge's tiles and vertex's tile, but this needs to sit
-        for a day for me to think about my first statement.
-        Instead of creating the edge first, instead grab the pointers together in an array as
-        a batch, then iterate through array to initialize the pointers as a group to a single edge.
-        e.g. if edge @ index in tile.edge_arr is nil, grab edge pointer at index of tile.edge_arr
-        and place in temp_edge_arr
-        Then grab the other corresponding edges of corresponding tiles in tile.tile_arr and use logic
-        to iterate through temp_edge_arr and link to newly constructed edge.
-        I didn't wanna modify the code yet seeing as I've yet to practice more with Python, and I'd
-        like you to walk me through the logic of this code when you get a chance before making any
-        modifications and possibly derping it up.
-        """
         for row in self.tile_array:
             for tile in row:
                 for index, edge in tile.edge_arr:

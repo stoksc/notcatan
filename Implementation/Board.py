@@ -1,5 +1,5 @@
 """
-This class is an amalgation of tiles, edges and vertices to represent the board. Don't ask how it works, 
+This class is an amalgamation of tiles, edges and vertices to represent the board. Don't ask how it works, 
 no one knows.
 """
 
@@ -66,13 +66,21 @@ class Board:
         for row in self.tile_array:
             for tile in row:
                 for index, edge in tile.edge_arr:
+                    # initialize edge and vertex attached to current tile
                     edge = Edge.Edge()
-                    tile.vertex_arr[index % 6] = Vertex.Vertex()
+                    new_vertex = tile.vertex_arr[index % 6] = Vertex.Vertex()
+                    # attach tile to vertex
+                    new_vertex.t1 = tile
                     if tile.tile_arr[index] is not None:
+                        # for one neighbor (border tiles) attach vertex to neighbor and vice versa
+                        tile.tile_arr[index].vertex_arr[(index + 3) % 6] = new_vertex
+                        new_vertex.t2 = tile.tile_arr[index]
+                        # attach edge to adjacent tile
                         tile.tile_arr[index].edge_arr[(index + 3) % 6] = edge
                         if tile.tile_arr[index-1] is not None:
-                            tile.tile_arr[index].vertex_arr[(index + 3) % 6] = tile.vertex_arr[index % 6]
-                            tile.tile_arr[index].vertex_arr[(index + 2) % 6] = tile.vertex_arr[index % 6]
+                            # for two neighbors (center tiles) do the same again for vertices
+                            tile.tile_arr[index-1].vertex_arr[(index + 2) % 6] = new_vertex
+                            new_vertex.t3 = tile.tile_arr[index-1]
 
     def is_valid_coordinate(self, x, y):
         try:

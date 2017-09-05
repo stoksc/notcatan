@@ -12,6 +12,7 @@ from Implementation import Inventory
 from Implementation import GameEngine
 from Implementation import Vertex
 
+
 class Player:
     def __init__(self, color, name):
         # this variable will be a mutex lock that is passed between players
@@ -32,6 +33,7 @@ class Player:
         """
         if self.turn:
             if self.inventory.has_road():
+                # TODO: make the GameEngine
                 road = GameEngine.place_road(edge)
                 if road != None:
                     self.inventory.add_road(road)

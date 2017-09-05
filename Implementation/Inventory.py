@@ -7,6 +7,7 @@ from Implementation import Constants
 
 
 class Inventory:
+
     def __init__(self):
         # player resources
         self.brick = 0

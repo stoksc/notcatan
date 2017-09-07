@@ -34,7 +34,7 @@ class Player:
         if self.turn:
             if self.inventory.has_road():
                 # TODO: make the GameEngine
-                road = GameEngine.place_road(edge)
+                road = GameEngine.place_road(self, edge)
                 if road != None:
                     self.inventory.add_road(road)
                 else:

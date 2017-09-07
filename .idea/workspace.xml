@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64b82d2b-af78-4093-85e5-a8baa29bbd40" name="Default" comment="fixed standards, added a document to design.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Settlers-of-definitely-not-Katan.iml" afterPath="$PROJECT_DIR$/.idea/Settlers-of-definitely-not-Katan.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="64b82d2b-af78-4093-85e5-a8baa29bbd40" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Implementation/Edge.py" afterPath="$PROJECT_DIR$/Implementation/Edge.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Implementation/Inventory.py" afterPath="$PROJECT_DIR$/Implementation/Inventory.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Implementation/Player.py" afterPath="$PROJECT_DIR$/Implementation/Player.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Implementation/Vertex.py" afterPath="$PROJECT_DIR$/Implementation/Vertex.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -381,7 +375,21 @@
       <option name="project" value="LOCAL" />
       <updated>1504551687270</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fixed standards, added a document to design.">
+      <created>1504824551550</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1504824551550</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fixed standards, added a document to design.">
+      <created>1504825021846</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1504825021846</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -786,16 +794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Implementation/GameEngine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="781">
-          <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding>
-            <element signature="e#194#226#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Implementation/Edge.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -827,6 +825,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Implementation/GameEngine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="781">
+          <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding>
+            <element signature="e#194#226#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

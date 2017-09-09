@@ -80,8 +80,6 @@ class Board:
                                 # for two neighbors (center tiles) do the same again for vertices
                                 tile.tile_arr[index-1].vertex_arr[(index + 2) % 6] = new_vertex
                                 new_vertex.t3 = tile.tile_arr[index-1]
-                    else:
-                        pass
 
     def is_valid_coordinate(self, x, y):
         try:

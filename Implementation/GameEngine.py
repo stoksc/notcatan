@@ -8,13 +8,14 @@ from Implementation import Road
 from Implementation import Settlement
 from Implementation import City
 
+
 class GameEngine:
 
     def __init__(self, players):
         self.board = Board.Board()
+        self.players = players
 
-
-    def place_road(player, edge):
+    def place_road(self, player, edge):
         """
         The GameEngine uses this method to place a road.
 
@@ -31,7 +32,7 @@ class GameEngine:
             return edge.get_road()
         return None
 
-    def place_settlement(player, vertex):
+    def place_settlement(self, player, vertex):
         """
         The GameEngine uses this method to place a settlement.
 
@@ -44,13 +45,12 @@ class GameEngine:
             is a valid vertex for a player to place the settlement, returns the settlement which was placed. Otherwise,
             returns None.
         """
-
         if(vertex.get_settlement == None) and (self.vertex_check(player)):
             vertex.settlement = Settlement.Settlement(player, vertex)
             return vertex.get_settlement()
         return None
 
-    def upgrade_settlement(player, vertex):
+    def upgrade_settlement(self, player, vertex):
         """
         The GameEngine uses this method to upgrade a settlement into a city.
 

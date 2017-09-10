@@ -34,7 +34,6 @@ class Inventory:
         self.grain -= 1
         self.settlements.append(settlement)
 
-    # TODO: create a remove_settlement method to complete functionality of add_city method
     def add_city(self, city):
         self.grain -= 2
         self.ore -= 3

@@ -23,7 +23,6 @@ class Board:
         self.connect_tiles()
         self.add_edges_and_vertices()
 
-    # TODO: post proof of this algorithm
     def connect_tiles(self):
         for i, row in self.tile_array:
             for j, tile in row:
@@ -58,7 +57,6 @@ class Board:
                         tile.t2 = self.tile_array[i][j+1]
                         self.tile_array[i][j+1].t5 = tile
 
-    # TODO: and prove this.
     def add_edges_and_vertices(self):
         for row in self.tile_array:
             for tile in row:
@@ -82,8 +80,6 @@ class Board:
                                 # for two neighbors (center tiles) do the same again for vertices
                                 tile.tile_arr[index-1].vertex_arr[(index + 2) % 6] = new_vertex
                                 new_vertex.t3 = tile.tile_arr[index-1]
-                    else:
-                        pass
 
     def is_valid_coordinate(self, x, y):
         try:

@@ -8,7 +8,6 @@ from Implementation import Tile
 from Implementation import Edge
 from Implementation import Vertex
 
-
 class Board:
 
     def __init__(self):
@@ -22,6 +21,7 @@ class Board:
 
         self.connect_tiles()
         self.add_edges_and_vertices()
+        self.connect_edges_to_edges()
 
     def connect_tiles(self):
         for i, row in self.tile_array:
@@ -80,6 +80,24 @@ class Board:
                                 # for two neighbors (center tiles) do the same again for vertices
                                 tile.tile_arr[index-1].vertex_arr[(index + 2) % 6] = new_vertex
                                 new_vertex.t3 = tile.tile_arr[index-1]
+
+    def connect_edges_to_edges(self):
+        for row in self.tile_array:
+            for tile in row:
+                for index, edge in tile.edge_arr:
+                    # edge's counterclockwise/clockwise 60degree neighbor
+                    ccw_neighbor_index = (index - 1) % 6
+                    cw_neighbor_index = (index + 1) % 6
+                    # connect it to to the two edges on the same tile (existence is known)
+                    edge.edge_arr[0] = tile.edge_arr[ccw_neighbor_index]
+                    edge.edge_arr[3] = tile.edge_arr[cw_neighbor_index]
+                    # check existence of first neighbor tile
+                    if tile.tile_arr[ccw_neighbor_index] is not None:
+                        # connect it to the this neighbor tile's edge
+                        edge.edge_arr[1] = tile.tile_arr[ccw_neighbor_index].edge_arr[(ccw_neighbor_index + 2) % 6]
+                    if tile.tile_arr[cw_neighbor_index] is not None:
+                        # connect it to the this other neighbor tile's edge
+                        edge.edge_arr[2] = tile.tile_arr[cw_neighbor_index].edge_arr[(cw_neighbor_index - 2) % 6]
 
     def is_valid_coordinate(self, x, y):
         try:

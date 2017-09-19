@@ -3,6 +3,6 @@ This is the city class. It contains a reference to a player that owns it and the
 """
 
 class City:
-    def __init__(self, player, vertex):
-        self.owner = player
+    def __init__(self, vertex):
+        self.owner = None
         self.vertex = vertex

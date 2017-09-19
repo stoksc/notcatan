@@ -4,6 +4,6 @@ This is the road class. It contains a reference to a player that owns it and the
 
 class Road:
 
-    def __init__(self, player, edge):
-        self.owner = player
+    def __init__(self, edge):
+        self.owner = None
         self.edge = edge

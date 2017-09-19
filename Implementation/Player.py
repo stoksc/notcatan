@@ -9,14 +9,14 @@ The player can place a road, place a settlement, upgrade a settlement and roll t
 """
 
 from Implementation import Inventory
-from Implementation import GameEngine
+from Implementation import Game_Engine
 from Implementation import Vertex
 
 
 class Player:
     def __init__(self, color, name):
         # this variable will be a mutex lock that is passed between players
-        self.turn = False
+        self.turn = False-*
         self.name = name
         self.color = color
         self.inventory = Inventory.Inventory()
@@ -33,7 +33,7 @@ class Player:
         """
         if self.turn:
             if self.inventory.has_road():
-                road = GameEngine.place_road(self, edge)
+                road = Game_Engine.place_road(edge)
                 if road != None:
                     self.inventory.add_road(road)
                 else:
@@ -53,7 +53,7 @@ class Player:
         """
         if self.turn:
             if self.inventory.has_settlement():
-                settlement = GameEngine.place_settlement(vertex)
+                settlement = Game_Engine.place_settlement(vertex)
                 if settlement != None:
                     self.inventory.add_settlement(settlement)
                 else:
@@ -71,7 +71,7 @@ class Player:
         """
         if self.turn:
             if self.inventory.has_city(vertex.get_settlement()):
-                city = GameEngine.place_city(vertex)
+                city = Game_Engine.place_city(vertex)
                 if city != None:
                     self.inventory.add_city(city)
                 else:

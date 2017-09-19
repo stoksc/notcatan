@@ -9,13 +9,24 @@ from Implementation import Settlement
 from Implementation import City
 
 
-class GameEngine:
+class Game_Engine:
 
-    def __init__(self, players):
-        self.board = Board.Board()
-        self.players = players
+    def __init__(self):
+        """
+        Upon initialization, the Game_Engine needs to create socket connections for each Player for a full game.
+        Upon complete connection confirmation, Game_Engine then begins initial setup logic. Waiting on individual
+        inputs from each socket following initial setup logic.
 
-    def place_road(self, player, edge):
+        Args:
+            None
+
+        Returns:
+            None
+        """
+        self.game_state = Game_State.Game_State()
+
+
+    def place_road(self, edge):
         """
         The GameEngine uses this method to place a road.
 
@@ -28,11 +39,11 @@ class GameEngine:
             was placed. Otherwise, returns None.
         """
         if(edge.road == None):
-            edge.road = Road.Road(player, edge)
+            edge.road = Road.Road(edge)
             return edge.get_road()
         return None
 
-    def place_settlement(self, player, vertex):
+    def place_settlement(self, vertex):
         """
         The GameEngine uses this method to place a settlement.
 
@@ -45,12 +56,13 @@ class GameEngine:
             is a valid vertex for a player to place the settlement, returns the settlement which was placed. Otherwise,
             returns None.
         """
-        if(vertex.get_settlement == None) and (self.vertex_check(player)):
-            vertex.settlement = Settlement.Settlement(player, vertex)
+        if(vertex.get_settlement == None) and (self.game_state.vertex_check(vertex)):
+            vertex.settlement = Settlement.Settlement(vertex)
+            self.game_state.add_invalid_vertex_to_build(vertex)
             return vertex.get_settlement()
         return None
 
-    def upgrade_settlement(self, player, vertex):
+    def upgrade_settlement(self, vertex):
         """
         The GameEngine uses this method to upgrade a settlement into a city.
 
@@ -63,6 +75,14 @@ class GameEngine:
             Otherwise, returns None.
         """
         vertex.settlement = None
-        vertex.city = City.City(player, vertex)
+        vertex.city = City.City(vertex)
         return vertex.city
 
+    def build_item(self, object_to_build_on):
+        if isinstance(object_to_build_on, self.board.Vertex):
+            if object_to_build_on.get_settlement() != None:
+                return self.upgrade_settlement(object_to_build_on)
+            return self.place_settlement(object_to_build_on)
+        if isinstance(object_to_build_on, self.game_state.board.Edge):
+            return self.place_road(object_to_build_on)
+        return None

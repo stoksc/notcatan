@@ -2,6 +2,10 @@
 This class is the vertex of the hexes on the game board. It contains references to tiles that share it,
 the settlement that is on it and the edges connected to it.
 """
+from Implementation import Tile
+from Implementation import Edge
+from Implementation import Settlement
+from Implementation import City
 
 
 class Vertex:
@@ -12,8 +16,14 @@ class Vertex:
         self.settlement = None
         self.city = None
 
-    def get_settlement(self):
+    def get_settlement(self) -> Settlement:
         return self.settlement
 
-    def get_city(self):
+    def get_city(self) -> City:
         return self.city
+
+    def get_edge_array(self) -> [Edge]:
+        return self.edge_array
+
+    def get_tile_array(self) -> [Tile]:
+        return self.tile_array

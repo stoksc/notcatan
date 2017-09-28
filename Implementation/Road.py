@@ -16,3 +16,6 @@ class Road:
 
     def get_edge(self) -> Edge:
         return self.edge
+
+    def set_owner(self, player):
+        self.owner = player

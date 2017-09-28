@@ -40,10 +40,10 @@ class Build_Info:
     def get_build_type(self) -> str:
         return self.build_type
 
-    def get_edge(self) -> object:
+    def get_edge(self) -> str:
         return self.edge
 
-    def get_vertex(self) -> object:
+    def get_vertex(self) -> str:
         return self.vertex
 
     def get_row(self) -> int:

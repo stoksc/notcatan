@@ -5,18 +5,60 @@ Definitely Not Katan game.
 
 from Implementation import Vertex
 from Implementation import Board
-from Implementation import Edge
 from Implementation import Player
+from Implementation import Settlement
+from Implementation import Road
 
 
 class Game_State:
 
-    def __init__(self):
-        " Game_Engine will handle populating the player_array and invalid_vertices_to_build_array with logic residing in Game_Engine from player input"
+    def __init__(self, player_array):
+        """
+        Game_Engine will handle populating the player_array and invalid_vertices_to_build_array with logic residing
+        in Game_Engine from player input
+        """
         self.board = Board.Board()
-        self.player_array = []
+        self.player_array = player_array
         self.invalid_vertices_to_build_array = []
-        self.current_player = None
+        self.current_player = self.player_array[0]
+
+    def initial_setup(self):
+        if len(self.player_array) == 4:
+            settlement1 = Settlement.Settlement(self.board.get_tile_array()[0][0].get_vertex("v4"))
+            settlement2 = Settlement.Settlement(self.board.get_tile_array()[3][2].get_vertex("v3"))
+            road1 = Road.Road(self.board.get_tile_array()[0][0].get_edge("e3"))
+            road2 = Road.Road(self.board.get_tile_array()[3][2].get_edge("e3"))
+            self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[0])
+
+            settlement1 = Settlement.Settlement(self.board.get_tile_array()[1][1].get_vertex("v3"))
+            settlement2 = Settlement.Settlement(self.board.get_tile_array()[2][2].get_vertex("v3"))
+            road1 = Road.Road(self.board.get_tile_array()[1][1].get_edge("e2"))
+            road2 = Road.Road(self.board.get_tile_array()[2][2].get_edge("e2"))
+            self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[1])
+
+            settlement1 = Settlement.Settlement(self.board.get_tile_array()[0][2].get_vertex("v3"))
+            settlement2 = Settlement.Settlement(self.board.get_tile_array()[1][3].get_vertex("v4"))
+            road1 = Road.Road(self.board.get_tile_array()[0][2].get_edge("e3"))
+            road2 = Road.Road(self.board.get_tile_array()[2][3].get_edge("e2"))
+            self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[2])
+
+            settlement1 = Settlement.Settlement(self.board.get_tile_array()[3][0].get_vertex("v3"))
+            settlement2 = Settlement.Settlement(self.board.get_tile_array()[4][1].get_vertex("v3"))
+            road1 = Road.Road(self.board.get_tile_array()[3][0].get_edge("e2"))
+            road2 = Road.Road(self.board.get_tile_array()[4][1].get_edge("e3"))
+            self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[3])
+
+    def setup_helper(self, settlement1, settlement2, road1, road2, player):
+        settlement1.set_owner(player)
+        settlement2.set_owner(player)
+        player.get_inventory().get_settlements().append(settlement1)
+        player.get_inventory().get_settlements().append(settlement2)
+        self.add_invalid_vertices_to_build(settlement1.get_vertex())
+        self.add_invalid_vertices_to_build(settlement2.get_vertex())
+        road1.set_owner(player)
+        road2.set_owner(player)
+        player.get_inventory().get_roads().append(road1)
+        player.get_inventory().get_roads().append(road2)
 
     def add_invalid_vertices_to_build(self, vertex):
         """

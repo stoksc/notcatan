@@ -105,3 +105,6 @@ class Board:
             return True
         except IndexError:
             return False
+
+    def get_tile_array(self) -> [[Tile]]:
+        return self.tile_array

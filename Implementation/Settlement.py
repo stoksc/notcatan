@@ -16,3 +16,6 @@ class Settlement:
 
     def get_vertex(self) -> Vertex:
         return self.vertex
+
+    def set_owner(self, player):
+        self.owner = player

@@ -15,3 +15,6 @@ class City:
 
     def get_vertex(self) -> Vertex:
         return self.vertex
+
+    def set_owner(self, owner):
+        self.owner = owner

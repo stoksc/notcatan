@@ -4,6 +4,9 @@ Class Inventory contains a set of objects belonging to a player and methods to m
 
 # local imports
 from Implementation import Constants
+from Implementation import Settlement
+from Implementation import City
+from Implementation import Road
 
 
 class Inventory:
@@ -72,3 +75,12 @@ class Inventory:
             return True
         else:
             return False
+
+    def get_settlements(self) -> [Settlement]:
+        return self.settlements
+
+    def get_roads(self) -> [Road]:
+        return self.roads
+
+    def get_cities(self) -> [City]:
+        return self.cities

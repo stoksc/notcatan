@@ -15,7 +15,13 @@ class Game_State:
     def __init__(self, player_array):
         """
         Game_Engine will handle populating the player_array and invalid_vertices_to_build_array with logic residing
-        in Game_Engine from player input
+        in Game_Engine from player input for this Game_State to be initialized.
+
+        Args:
+            player_array ([Player]): An array of the Player class argument that is passed to this method to properly
+            initialize the Game_State.
+        Returns:
+            None
         """
         self.board = Board.Board()
         self.player_array = player_array
@@ -23,6 +29,15 @@ class Game_State:
         self.current_player = self.player_array[0]
 
     def initial_setup(self):
+        """
+        The Game_State class invokes this method in order to proceed with the logic and initialization of the beginner
+        setup for a Settlers of Definitely Not Katan game.
+
+        Args:
+            None.
+        Returns:
+            None.
+        """
         if len(self.player_array) == 4:
             settlement1 = Settlement.Settlement(self.board.get_tile_array()[0][0].get_vertex("v4"))
             settlement2 = Settlement.Settlement(self.board.get_tile_array()[3][2].get_vertex("v3"))
@@ -49,6 +64,25 @@ class Game_State:
             self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[3])
 
     def setup_helper(self, settlement1, settlement2, road1, road2, player):
+        """
+        The Game_State class invokes this method when initializing the beginner setup for a Settlers of Definitely Not
+        Katan game.
+
+        Args:
+            settlement1 (Settlement): A settlement object passed, that was instantiated before this method was invoked,
+            to instantiate the proper values for the object in the Game_State.
+            settlement2 (Settlement): A settlement object passed, that was instantiated before this method was invoked,
+            to instantiate the proper values for the object in the Game_State.
+            road1 (Road): A road object passed, that was instantiated before this method was invoked, to instantiate the
+            proper values for the object in the Game_State.
+            road2 (Road): A road object passed, that was instantiated before this method was invoked, to instantiate the
+            proper values for the object in the Game_State.
+            player (Player): A player object passed, that was instantiated before this method was invoked and that the
+            previous arguments passed to this method are to use to assist in instantiating the proper values for the
+            previous arguments passed in the Game_State.
+        Returns:
+             None.
+        """
         settlement1.set_owner(player)
         settlement2.set_owner(player)
         player.get_inventory().get_settlements().append(settlement1)
@@ -67,7 +101,6 @@ class Game_State:
         Args:
             vertex (Vertex): The vertex used to find the set of invalid vertices to add to the invalid_vertices_to_
             build_array.
-
         Returns:
             None
         """

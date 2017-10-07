@@ -15,22 +15,22 @@ class Tile:
         self.type = None
         self.value = None
 
-    def get_tile_array(self) -> [Tile]:
+    def get_tile_array(self):
         return self.tile_arr
 
-    def get_vertex_arr(self) -> [Vertex]:
+    def get_vertex_arr(self):
         return self.vertex_arr
 
-    def get_edge_arr(self) -> [Edge]:
+    def get_edge_arr(self):
         return self.edge_arr
 
-    def get_type(self) -> str:
+    def get_type(self):
         return self.type
 
-    def get_value(self) -> int:
+    def get_value(self):
         return self.value
 
-    def get_vertex(self, vx) -> Vertex:
+    def get_vertex(self, vx):
         if vx == "v1":
             return self.vertex_arr[self.v1]
         elif vx == "v2":
@@ -44,7 +44,7 @@ class Tile:
         elif vx == "v6":
             return self.vertex_arr[self.v6]
 
-    def get_edge(self, ex) -> Edge:
+    def get_edge(self, ex):
         if ex == "e1":
             return self.edge_arr[self.e1]
         elif ex == "e2":
@@ -58,7 +58,7 @@ class Tile:
         elif ex == "e6":
             return self.edge_arr[self.e6]
 
-    def get_tile(self, tx) -> Tile:
+    def get_tile(self, tx):
         if tx == "t1":
             return self.tile_arr[self.t1]
         elif tx == "t2":

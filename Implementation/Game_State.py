@@ -27,6 +27,17 @@ class Game_State:
         self.player_array = player_array
         self.invalid_vertices_to_build_array = []
         self.current_player = self.player_array[0]
+        self.robber = self.board.get_tile_array()[2][0]
+        self.tile_forest_type_array = []
+        self.tile_forest_type_array.append(self.board.get_tile_array()[0][0], self.board.get_tile_array()[2][1],\
+                                           self.board.get_tile_array()[0][3], self.board.get_tile_array()[4][2])
+        for tile in self.tile_forest_type_array:
+            tile.type = "forest"
+
+        self.tile_forest_type_array.append(self.board.get_tile_array()[0][0], self.board.get_tile_array()[2][1], \
+                                           self.board.get_tile_array()[0][3], self.board.get_tile_array()[4][2])
+        for tile in self.tile_forest_type_array:
+            tile.type = "forest"
 
     def initial_setup(self):
         """
@@ -107,7 +118,7 @@ class Game_State:
         for i in range(len(vertex.get_edge_array())):
             self.invalid_vertices_to_build_array.append(vertex.get_edge_array()[i].other_vertex(vertex))
 
-    def vertex_check(self, vertex) -> bool:
+    def vertex_check(self, vertex):
         """
         The Game_State uses this method to check whether or not the vertex passed exists in the invalid_vertices_to_
         build_array.
@@ -125,11 +136,11 @@ class Game_State:
             self.current_player = player
             self.player_array.append(player)
 
-    def get_board(self) -> Board:
+    def get_board(self):
         return self.board
 
-    def get_current_player(self) -> Player:
+    def get_current_player(self):
         return self.current_player
 
-    def get_player_array(self) -> [Player]:
+    def get_player_array(self):
         return self.player_array

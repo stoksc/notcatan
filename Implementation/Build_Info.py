@@ -34,20 +34,20 @@ class Build_Info:
             self.build_type = "Settlement/City"
             self.vertex = vertex
 
-    def get_dev_card(self) -> bool:
+    def get_dev_card(self):
         return self.dev_card
 
-    def get_build_type(self) -> str:
+    def get_build_type(self):
         return self.build_type
 
-    def get_edge(self) -> str:
+    def get_edge(self):
         return self.edge
 
-    def get_vertex(self) -> str:
+    def get_vertex(self):
         return self.vertex
 
-    def get_row(self) -> int:
+    def get_row(self):
         return self.row
 
-    def get_column(self) -> int:
+    def get_column(self):
         return self.column

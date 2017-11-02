@@ -8,6 +8,7 @@ from Implementation import Edge
 from Implementation import Road
 from Implementation import Settlement
 from Implementation import City
+from Implementation import Build_Info
 
 
 class Game_Engine:
@@ -26,8 +27,9 @@ class Game_Engine:
             build_info (Build_Info): Object with relevant information to dynamically determine what and where the
             object to instantiate in the game_state.
         Returns:
-            game_state (Game_State): Returns the Game_State that has been modified or not modified since original call
-            of the build() method.
+            True (bool): Returns a True boolean value if the game_state was modified and the item determined from the
+            passed info was built.
+            False (bool): Returns a False boolean value if the game_state was not modified for any reason.
         """
         if self.check_player_inventory(build_info.get_build_type()):
             location_to_build = None
@@ -43,6 +45,8 @@ class Game_Engine:
                     return self.build_item(location_to_build)
             elif build_info.get_build_type() == "Development Card":
                 return self.build_item(location_to_build)
+            return False
+        return False
 
     def check_player_inventory(self, build_type):
         """

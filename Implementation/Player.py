@@ -17,11 +17,11 @@ class Player:
         self.color = color
         self.inventory = Inventory.Inventory()
 
-    def get_name(self) -> str:
+    def get_name(self):
         return self.name
 
-    def get_color(self) -> str:
+    def get_color(self):
         return self.color
 
-    def get_inventory(self) -> Inventory:
+    def get_inventory(self):
         return self.inventory

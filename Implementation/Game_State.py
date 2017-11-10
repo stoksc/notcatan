@@ -27,6 +27,10 @@ class Game_State:
         self.player_array = player_array
         self.invalid_vertices_to_build_array = []
         self.current_player = self.player_array[0]
+        self.robber_tile = None
+        if len(self.player_array) == 4:
+            self.initial_setup()
+            self.robber_tile = self.board.get_tile_array()[0][2]
 
     def initial_setup(self):
         """
@@ -38,30 +42,59 @@ class Game_State:
         Returns:
             None.
         """
-        if len(self.player_array) == 4:
-            settlement1 = Settlement.Settlement(self.board.get_tile_array()[0][0].get_vertex("v4"))
-            settlement2 = Settlement.Settlement(self.board.get_tile_array()[3][2].get_vertex("v3"))
-            road1 = Road.Road(self.board.get_tile_array()[0][0].get_edge("e3"))
-            road2 = Road.Road(self.board.get_tile_array()[3][2].get_edge("e3"))
-            self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[0])
+        settlement1 = Settlement.Settlement(self.board.get_tile_array()[0][0].get_vertex("v4"))
+        settlement2 = Settlement.Settlement(self.board.get_tile_array()[3][2].get_vertex("v3"))
+        road1 = Road.Road(self.board.get_tile_array()[0][0].get_edge("e3"))
+        road2 = Road.Road(self.board.get_tile_array()[3][2].get_edge("e3"))
+        self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[0])
 
-            settlement1 = Settlement.Settlement(self.board.get_tile_array()[1][1].get_vertex("v3"))
-            settlement2 = Settlement.Settlement(self.board.get_tile_array()[2][2].get_vertex("v3"))
-            road1 = Road.Road(self.board.get_tile_array()[1][1].get_edge("e2"))
-            road2 = Road.Road(self.board.get_tile_array()[2][2].get_edge("e2"))
-            self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[1])
+        settlement1 = Settlement.Settlement(self.board.get_tile_array()[1][1].get_vertex("v3"))
+        settlement2 = Settlement.Settlement(self.board.get_tile_array()[2][2].get_vertex("v3"))
+        road1 = Road.Road(self.board.get_tile_array()[1][1].get_edge("e2"))
+        road2 = Road.Road(self.board.get_tile_array()[2][2].get_edge("e2"))
+        self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[1])
 
-            settlement1 = Settlement.Settlement(self.board.get_tile_array()[0][2].get_vertex("v3"))
-            settlement2 = Settlement.Settlement(self.board.get_tile_array()[1][3].get_vertex("v4"))
-            road1 = Road.Road(self.board.get_tile_array()[0][2].get_edge("e3"))
-            road2 = Road.Road(self.board.get_tile_array()[2][3].get_edge("e2"))
-            self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[2])
+        settlement1 = Settlement.Settlement(self.board.get_tile_array()[0][2].get_vertex("v3"))
+        settlement2 = Settlement.Settlement(self.board.get_tile_array()[1][3].get_vertex("v4"))
+        road1 = Road.Road(self.board.get_tile_array()[0][2].get_edge("e3"))
+        road2 = Road.Road(self.board.get_tile_array()[2][3].get_edge("e2"))
+        self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[2])
 
-            settlement1 = Settlement.Settlement(self.board.get_tile_array()[3][0].get_vertex("v3"))
-            settlement2 = Settlement.Settlement(self.board.get_tile_array()[4][1].get_vertex("v3"))
-            road1 = Road.Road(self.board.get_tile_array()[3][0].get_edge("e2"))
-            road2 = Road.Road(self.board.get_tile_array()[4][1].get_edge("e3"))
-            self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[3])
+        settlement1 = Settlement.Settlement(self.board.get_tile_array()[3][0].get_vertex("v3"))
+        settlement2 = Settlement.Settlement(self.board.get_tile_array()[4][1].get_vertex("v3"))
+        road1 = Road.Road(self.board.get_tile_array()[3][0].get_edge("e2"))
+        road2 = Road.Road(self.board.get_tile_array()[4][1].get_edge("e3"))
+        self.setup_helper(settlement1, settlement2, road1, road2, self.player_array[3])
+
+        tile_type_array = []
+        tile_type_array.append(self.board.get_tile_array()[0][0], self.board.get_tile_array()[2][1], \
+                               self.board.get_tile_array()[2][3], self.board.get_tile_array()[4][2])
+        for tile in tile_type_array:
+            tile.type = "Forest"
+
+        tile_type_array = []
+        tile_type_array.append(self.board.get_tile_array()[0][1], self.board.get_tile_array()[1][3], \
+                               self.board.get_tile_array()[3][1], self.board.get_tile_array()[3][2])
+        for tile in tile_type_array:
+            tile.type = "Pasture"
+
+        tile_type_array = []
+        tile_type_array.append(self.board.get_tile_array()[0][2], self.board.get_tile_array()[2][2], \
+                               self.board.get_tile_array()[2][4], self.board.get_tile_array()[4][1])
+        for tile in tile_type_array:
+            tile.type = "Fields"
+
+        tile_type_array = []
+        tile_type_array.append(self.board.get_tile_array()[1][0], self.board.get_tile_array()[1][2], \
+                               self.board.get_tile_array()[3][0])
+        for tile in tile_type_array:
+            tile.type = "Hills"
+
+        tile_type_array = []
+        tile_type_array.append(self.board.get_tile_array()[1][1], self.board.get_tile_array()[3][3], \
+                               self.board.get_tile_array()[4][0])
+        for tile in tile_type_array:
+            tile.type = "Mountains"
 
     def setup_helper(self, settlement1, settlement2, road1, road2, player):
         """
@@ -107,7 +140,7 @@ class Game_State:
         for i in range(len(vertex.get_edge_array())):
             self.invalid_vertices_to_build_array.append(vertex.get_edge_array()[i].other_vertex(vertex))
 
-    def vertex_check(self, vertex) -> bool:
+    def vertex_check(self, vertex):
         """
         The Game_State uses this method to check whether or not the vertex passed exists in the invalid_vertices_to_
         build_array.
@@ -120,16 +153,11 @@ class Game_State:
         """
         return self.invalid_vertices_to_build_array.__contains__(vertex)
 
-    def append_player(self, player):
-        if len(self.get_player_array()) == 0:
-            self.current_player = player
-            self.player_array.append(player)
-
-    def get_board(self) -> Board:
+    def get_board(self):
         return self.board
 
-    def get_current_player(self) -> Player:
+    def get_current_player(self):
         return self.current_player
 
-    def get_player_array(self) -> [Player]:
+    def get_player_array(self):
         return self.player_array

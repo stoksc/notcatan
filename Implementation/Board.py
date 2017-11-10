@@ -124,3 +124,9 @@ class Board:
             return True
         except IndexError:
             return False
+<<<<<<< HEAD
+=======
+
+    def get_tile_array(self):
+        return self.tile_array
+>>>>>>> 670cac44ba84174e4b3708348c49ce2b402059c7

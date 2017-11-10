@@ -14,16 +14,16 @@ class Edge:
         self.vertex_array = [self.v1, self.v2] = [None, None]
         self.road = None
 
-    def get_road(self) -> Road:
+    def get_road(self):
         return self.road
 
-    def get_edge_array(self) -> [object]:
+    def get_edge_array(self):
         return self.edge_array
 
-    def get_tile_array(self) -> [Tile]:
+    def get_tile_array(self):
         return self.tile_array
 
-    def other_vertex(self, vertex) -> Vertex:
+    def other_vertex(self, vertex):
         if vertex == self.vertex_array[self.v1]:
             return self.vertex_array[self.v2]
         else:

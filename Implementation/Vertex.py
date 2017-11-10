@@ -16,14 +16,14 @@ class Vertex:
         self.settlement = None
         self.city = None
 
-    def get_settlement(self) -> Settlement:
+    def get_settlement(self):
         return self.settlement
 
     def get_city(self) -> City:
         return self.city
 
-    def get_edge_array(self) -> [Edge]:
+    def get_edge_array(self):
         return self.edge_array
 
-    def get_tile_array(self) -> [Tile]:
+    def get_tile_array(self):
         return self.tile_array

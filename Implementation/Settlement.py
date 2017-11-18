@@ -1,8 +1,8 @@
 """
 This is the settlement class. It contains a reference to a player that owns it and the vertex it exists on.
 """
-from Implementation import Player
-from Implementation import Vertex
+import Player
+import Vertex
 
 
 class Settlement:
@@ -10,12 +10,3 @@ class Settlement:
     def __init__(self, vertex):
         self.owner = None
         self.vertex = vertex
-
-    def get_owner(self):
-        return self.owner
-
-    def get_vertex(self):
-        return self.vertex
-
-    def set_owner(self, player):
-        self.owner = player

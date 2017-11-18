@@ -1,27 +1,17 @@
 """
 This is the edge class. It contains all connected edges and the two tiles it belongs to.
 """
-from Implementation import Road
-from Implementation import Tile
-from Implementation import Vertex
+import Road
+import Tile
+import Vertex
 
 
 class Edge:
-
     def __init__(self):
-        self.edge_array = [self.e1, self.e2, self.e3, self.e4] = [None, None, None, None]
-        self.tile_array = [self.t1, self.t2] = [None, None]
-        self.vertex_array = [self.v1, self.v2] = [None, None]
+        self.edge_arr = [self.e1, self.e2, self.e3, self.e4] = [None, None, None, None]
+        self.tile_arr = [self.t1, self.t2] = [None, None]
+        self.vertex_arr = [self.v1, self.v2] = [None, None]
         self.road = None
-
-    def get_road(self):
-        return self.road
-
-    def get_edge_array(self):
-        return self.edge_array
-
-    def get_tile_array(self):
-        return self.tile_array
 
     def other_vertex(self, vertex):
         if vertex == self.vertex_array[self.v1]:

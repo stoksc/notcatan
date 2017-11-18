@@ -2,20 +2,20 @@
 This class is the GameEngine class. It contains the object repository and the logic that the game follows so that the
 Katan players can experience the functionality of the game itself.
 """
-from Implementation import Game_State
-from Implementation import Vertex
-from Implementation import Edge
-from Implementation import Road
-from Implementation import Settlement
-from Implementation import City
-from Implementation import Build_Info
+import GameState
+import Vertex
+import Edge
+import Road
+import Settlement
+import City
+import BuildInfo
+import Constants
 
-
-class Game_Engine:
+class GameEngine:
 
     def __init__(self, player_array):
-        self.game_state = Game_State.Game_State(player_array)
-        if len(player_array) == 4:
+        self.game_state = GameState.GameState(player_array)
+        if len(player_array) == Constants.NUMBER_OF_CLIENTS:
             self.game_state.initial_setup()
 
     def build(self, build_info):
@@ -24,26 +24,26 @@ class Game_Engine:
         the instantiation of the object.
 
         Args:
-            build_info (Build_Info): Object with relevant information to dynamically determine what and where the
+            build_info (BuildInfo): Object with relevant information to dynamically determine what and where the
             object to instantiate in the game_state.
         Returns:
             True (bool): Returns a True boolean value if the game_state was modified and the item determined from the
             passed info was built.
             False (bool): Returns a False boolean value if the game_state was not modified for any reason.
         """
-        if self.check_player_inventory(build_info.get_build_type()):
+        if self.check_player_inventory(build_info.build_type):
             location_to_build = None
-            if build_info.get_build_type() == "Road":
-                location_to_build = self.game_state.get_board().get_tile_array()[build_info.get_row()]\
-                    [build_info.get_column()].get_edge(build_info.get_edge())
+            if build_info.build_type == "Road":
+                location_to_build = self.game_state.board.tile_array[build_info.row]\
+                    [build_info.column].edge_arr[build_info.index]
                 if self.check_location(location_to_build):
                     return self.build_item(location_to_build)
-            elif build_info.get_build_type() == "Settlement/City":
-                location_to_build = self.game_state.get_board().get_tile_array()[build_info.get_row()]\
-                    [build_info.get_column()].get_vertex(build_info.get_vertex())
+            elif build_info.build_type == "Settlement/City":
+                location_to_build = self.game_state.board.tile_array[build_info.row]\
+                    [build_info.column].vertex_arr[build_info.index]
                 if self.check_location(location_to_build):
                     return self.build_item(location_to_build)
-            elif build_info.get_build_type() == "Development Card":
+            elif build_info.build_type == "Development Card":
                 return self.build_item(location_to_build)
             return False
         return False
@@ -64,16 +64,16 @@ class Game_Engine:
             to instantiate the type of object the build() method is attempting to instantiate.
         """
         if build_type == "Road":
-            return self.game_state.get_current_player().get_inventory().has_road()
+            return self.game_state.current_player.inventory.has_road()
         elif build_type == "Settlement/City":
-            if self.game_state.get_current_player().get_inventory().has_city():
+            if self.game_state.current_player.inventory.has_city():
                 return True
-            elif self.game_state.get_current_player().get_inventory().has_settlement():
+            elif self.game_state.current_player.inventory.has_settlement():
                 return True
             else:
                 return False
         else:
-            return self.game_state.get_current_player().get_inventory().has_dev_card()
+            return self.game_state.current_player.inventory.has_dev_card()
 
     def check_location(self, object_to_build_on):
         """
@@ -89,13 +89,13 @@ class Game_Engine:
              False (bool): Returns a False boolean value if the object_to_build_on value is not a valid value in order
              to proceed with the build() method that invoked this method.
         """
-        if type(object_to_build_on) is Edge and object_to_build_on.get_road() is None:
+        if type(object_to_build_on) is Edge.Edge and object_to_build_on.road is None:
             return True
-        elif type(object_to_build_on) is Vertex and object_to_build_on.get_settlement() is None and\
+        elif type(object_to_build_on) is Vertex.Vertex and object_to_build_on.settlement is None and\
                 self.game_state.vertex_check(object_to_build_on):
             return True
-        elif type(object_to_build_on) is Vertex and object_to_build_on.get_settlement().get_owner() ==\
-                self.game_state.get_current_player():
+        elif type(object_to_build_on) is Vertex.Vertex and object_to_build_on.settlement.owner ==\
+                self.game_state.current_player:
             return True
         return False
 
@@ -112,23 +112,22 @@ class Game_Engine:
              None
         """
         if object_to_build_on is None:
-            self.game_state.get_current_player().get_inventory().add_dev_card(Development_Card.Development_Card())
+            self.game_state.current_player.inventory.add_dev_card(Development_Card.Development_Card())
             return True
-        elif type(object_to_build_on) is Vertex and object_to_build_on.get_settlement() is None:
+        elif type(object_to_build_on) is Vertex.Vertex and object_to_build_on.settlement is None:
             self.game_state.add_invalid_vertices_to_build(object_to_build_on)
             object_to_build_on.settlement = Settlement.Settlement(object_to_build_on)
-            self.game_state.get_current_player().get_inventory().add_settlement(object_to_build_on.get_settlement())
+            self.game_state.current_player.inventory.add_settlement(object_to_build_on.settlement)
             return True
-        elif type(object_to_build_on) is Vertex and object_to_build_on.get_settlement().get_owner() ==\
-                self.game_state.get_current_player():
+        elif type(object_to_build_on) is Vertex.Vertex and object_to_build_on.settlement.owner ==\
+                self.game_state.current_player:
             object_to_build_on.settlement = None
             object_to_build_on.city = City.City(object_to_build_on)
-            self.game_state.get_current_player().get_inventory().add_city(object_to_build_on.get_city())
+            self.game_state.current_player.inventory.add_city(object_to_build_on.city)
             return True
-        elif type(object_to_build_on) is Edge:
+        elif type(object_to_build_on) is Edge.Edge:
             object_to_build_on.road = Road.Road(object_to_build_on)
-            self.game_state.get_current_player().get_inventory().add_road(object_to_build_on.get_road())
+            self.game_state.current_player.inventory.add_road(object_to_build_on.road)
             return True
-
-    def get_game_state(self):
-        return self.game_state
+    def next_player(self):
+        self.game_state.next_player()

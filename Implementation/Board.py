@@ -21,6 +21,7 @@ class Board:
         self.add_edges()
         self.add_vertices()
         self.connect_edges_to_edges()
+        self.connect_vertices_to_vertices()
 
     def connect_tiles(self):
         for i, row in enumerate(self.tile_array):
@@ -105,6 +106,15 @@ class Board:
                     if tile.tile_arr[cw_neighbor_index] is not None:
                         # connect it to the this other neighbor tile's edge
                         edge.edge_arr[2] = tile.tile_arr[cw_neighbor_index].edge_arr[(cw_neighbor_index - 2) % 6]
+
+    def connect_vertices_to_vertices(self):
+        for row in self.tile_array:
+            for tile in row:
+                for index, vertex in enumerate(tile.vertex_arr):
+                    vertex.adj_vertices.add(tile.vertex_arr[(index - 1) % 6])
+                    vertex.adj_vertices.add(tile.vertex_arr[(index + 1) % 6])
+                    if tile.tile_arr[index] is not None:
+                        vertex.adj_vertices.add(tile.tile_arr[index].vertex_arr[(index - 1) % 6])
 
     def __repr__(self):
         r = ""

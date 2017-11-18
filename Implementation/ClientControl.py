@@ -9,7 +9,7 @@ class ClientControl():
         self.sock = socket.socket(socket.AF_INET,
                              socket.SOCK_STREAM)
         #connect the socket to the port where the server is listening
-        serv_addr = ('localhost', 5000)
+        serv_addr = ('localhost', 8000)
         print('connecting to {} port {}'.format(serv_addr[0],serv_addr[1]))
         self.sock.connect(serv_addr)
 

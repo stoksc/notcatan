@@ -3,9 +3,9 @@ This is the Build_Info class. It contains information that was transmitted from 
 """
 
 
-class Build_Info:
+class BuildInfo:
 
-    def __init__(self, row, column, edge, vertex, dev_card):
+    def __init__(self, row, column, index, edge, vertex, dev_card):
         """
         The Build_Info initializes with all values populated with some value when created.
 
@@ -23,31 +23,13 @@ class Build_Info:
         self.dev_card = dev_card
         if self.dev_card is True:
             self.build_type = "Development Card"
-        elif edge is not None:
+        elif edge:
             self.build_type = "Road"
             self.row = row
             self.column = column
-            self.edge = edge
-        elif vertex is not None:
+            self.index = index
+        elif vertex:
+            self.build_type = "Settlement/City"
             self.row = row
             self.column = column
-            self.build_type = "Settlement/City"
-            self.vertex = vertex
-
-    def get_dev_card(self):
-        return self.dev_card
-
-    def get_build_type(self):
-        return self.build_type
-
-    def get_edge(self):
-        return self.edge
-
-    def get_vertex(self):
-        return self.vertex
-
-    def get_row(self):
-        return self.row
-
-    def get_column(self):
-        return self.column
+            self.index = index

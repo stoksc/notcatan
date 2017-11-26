@@ -10,7 +10,7 @@ player_addrs = host.get_conns()
 player_array = []
 netid = player_addrs[0][1][0] + '.' + str(player_addrs[0][1][1])
 player1 = Player.Player(netid, "blue", "blue")
-player_addrs[1][1][0] + '.' + str(player_addrs[1][1][1])
+netid = player_addrs[1][1][0] + '.' + str(player_addrs[1][1][1])
 player2 = Player.Player(netid, "red", "red")
 # player_addrs[2][1][0] + '.' + str(player_addrs[2][1][1])
 # player3 = Player.Player(netid, "white", "Chad Smith")
@@ -47,14 +47,13 @@ while True:
         current_request = host.requests.get()
         requester_netid = current_request[0][1][0] + '.' + str(current_request[0][1][1])
         if requester_netid == game_engine.game_state.current_player.netid:
-            print('success')
-            print(current_request[1])
-            print(game_engine.game_state.current_player.netid, requester_netid)
             build_info = make_build_info(current_request[1])
             if build_info is not None:
-                game_engine.build(build_info)
+                print(current_request)
+                print(game_engine.build(build_info))
             else:
                 game_engine.next_player()
+
 
 #                                               r, c, i, edge,  vert, devc
 print(str(game_engine.build(BuildInfo(0, 0, 0, False, True, False))))

@@ -33,13 +33,15 @@ class HostControl:
                 print('{} clients connected. done.'.format(NUMBER_OF_CLIENTS))
                 break
         return self.clients
-    
+
     def rec_data(self, client):
         while 1:
             time.sleep(1)
             data = bytes.decode(client[0].recv(128))
             request = (client, data)
             self.requests.put(request)
+
+    def rec_data(self, client):
 
     def close(self):
         print('closing socket')

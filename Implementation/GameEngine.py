@@ -129,5 +129,6 @@ class GameEngine:
             object_to_build_on.road = Road.Road(object_to_build_on)
             self.game_state.current_player.inventory.add_road(object_to_build_on.road)
             return True
+
     def next_player(self):
         self.game_state.next_player()

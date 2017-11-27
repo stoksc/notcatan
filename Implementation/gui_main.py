@@ -198,6 +198,10 @@ while not game_end:
                  row, col, vertex = int(req[4]), int(req[5]), int(req[6])
                  index = row_1D(row, col)
                  window.blit(placed_settlement, (gui_tile_list[index].vlist[vertex][0] - s_width // 2, gui_tile_list[index].vlist[vertex][1] - s_height // 2))
+             elif req[0:4] == 'road':
+                 row, col, edge = int(req[4]), int(req[5]), int(req[6])
+                 index = row_1D(row, col)
+                 window.blit(placed_road, (gui_tile_list[index].elist[edge][0] - s_width // 2, gui_tile_list[index].elist[edge][1] - s_height // 2))
 
     for event in pygame.event.get():
         mouse_pos = pygame.mouse.get_pos()

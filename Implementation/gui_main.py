@@ -144,9 +144,12 @@ pass_button = pygame.image.load('assets\\placeholder_tile.png').convert_alpha()
 window.blit(pass_button, (0, 0))
 pass_button_rect = pass_button.get_rect(topleft=(0, 0))
 
+# loading images #####
 road_stack = pygame.image.load('assets\\placeholder_road.png').convert_alpha()
 settlement_stack = pygame.image.load('assets\\placeholder_settlement.png').convert_alpha()
 temp_tile = pygame.image.load('assets\\placeholder_tile.png').convert_alpha()
+
+
 
 # Draws the board. (Generates rectangle, gui tile object and appends to respective lists.)
 
@@ -178,7 +181,7 @@ road_stack_rect = road_stack.get_rect(topleft=(300, 600))
 window.blit(settlement_stack, (800, 600))
 settlement_stack_rect = settlement_stack.get_rect(topleft=(800, 600))
 
-sprites = pygame.sprite.Group()
+upgraded_cities = pygame.sprite.Group()
 dragging_s = False
 
 h_s = pygame.sprite.Sprite()
@@ -204,12 +207,14 @@ while not game_end:
              elif req == 'endt':
                  turn = False
              elif req[0:4] == 'sett':
-                 row, col, vertex = int(req[4]), int(req[5]), int(req[6])
+                 row, col, vertex, p_id = int(req[4]), int(req[5]), int(req[6]), reg[7]
                  index = row_1D(row, col)
+                 placed_settlement = pygame.image.load('assets\\SettlementP' + p_id + '.png').convert_alpha()
                  window.blit(placed_settlement, (gui_tile_list[index].vlist[vertex][0] - s_width // 2, gui_tile_list[index].vlist[vertex][1] - s_height // 2))
              elif req[0:4] == 'road':
-                 row, col, edge = int(req[4]), int(req[5]), int(req[6])
+                 row, col, edge, p_id = int(req[4]), int(req[5]), int(req[6]), req[7]
                  index = row_1D(row, col)
+                 placed_road = pygame.image.load('assets\\RoadP' + p_id + '-' + str(edge) + '.png').convert_alpha()
                  window.blit(placed_road, (gui_tile_list[index].elist[edge][0] - s_width // 2, gui_tile_list[index].elist[edge][1] - s_height // 2))
              elif req[0:4] == 'errr':
                  #TO DO: Print error message in a log

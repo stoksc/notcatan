@@ -53,22 +53,22 @@ game_engine = GameEngine.GameEngine(player_array)
 
 # build initial 'beginner' setup
 game_engine.build(BuildInfo(0, 0, 3, False, True, False))
-broadcast_message('sett003')
+broadcast_message('sett0030')
 game_engine.build(BuildInfo(3, 2, 2, False, True, False))
-broadcast_message('sett322')
+broadcast_message('sett3220')
 game_engine.build(BuildInfo(0, 0, 2, True, False, False))
-broadcast_message('road002')
+broadcast_message('road0020')
 game_engine.build(BuildInfo(3, 2, 2, True, False, False))
-broadcast_message('road322')
+broadcast_message('road3220')
 game_engine.next_player()
 game_engine.build(BuildInfo(1, 1, 2, False, True, False))
-broadcast_message('sett112')
+broadcast_message('sett1121')
 game_engine.build(BuildInfo(2, 2, 2, False, True, False))
-broadcast_message('sett222')
+broadcast_message('sett2221')
 game_engine.build(BuildInfo(1, 1, 1, True, False, False))
-broadcast_message('road111')
+broadcast_message('road1111')
 game_engine.build(BuildInfo(2, 2, 2, True, False, False))
-broadcast_message('road222')
+broadcast_message('road2221')
 game_engine.next_player()
 
 # start first player's turn and roll first dice
@@ -90,10 +90,10 @@ while True:
                 if result is True:
                     print('>>> broadcasting success')
                     broadcast_resources()
-                    broadcast_message(current_request[1])
+                    broadcast_message(current_request[1] + str(game_engine.game_state.current_player_number))
                 elif result == 'city':
                     print('>>> broadcasting success')
-                    new_message = 'city' + current_request[1][4::]
+                    new_message = 'city' + current_request[1][4::] + str(game_engine.game_state.current_player_number)
                     broadcast_message(new_message)
                 else:
                     print('>>> sending error')

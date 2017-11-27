@@ -204,6 +204,9 @@ while not game_end:
                  row, col, edge = int(req[4]), int(req[5]), int(req[6])
                  index = row_1D(row, col)
                  window.blit(placed_road, (gui_tile_list[index].elist[edge][0] - s_width // 2, gui_tile_list[index].elist[edge][1] - s_height // 2))
+             elif req[0:4] == 'errr':
+                 #TO DO: Print error message in a log
+                 print("Build Attempt Failed")
 
     for event in pygame.event.get():
         mouse_pos = pygame.mouse.get_pos()
@@ -240,20 +243,9 @@ while not game_end:
                 else:
                     message = "sett4" + str(index-16) + str(target_i)
 
-    ################ SETTLEMENT CHECK  ################################################################################
-                #Send "message" variable to your code, put boolean here:
-                valid_drop = True
-    ##################################################################################################################
-                # End Section.
-                print(message)
-                if valid_drop:
-                    # Displays placed settlement, positioned so the center of it in on the vertex.
-                    window.blit(placed_settlement, (target[0]- s_width //2 , target[1] - s_height//2))
+                client.build_obj(message)
 
-                    valid_drop = False
-                    # TO DO: Update gamestate etc
-                else:
-                    print("Not Valid")
+                print(message)
                 dragging_s = False
             elif event.type == pygame.MOUSEMOTION:
                 if dragging_s:
@@ -288,20 +280,8 @@ while not game_end:
                     message = "road3" + str(index - 12) + str(target_i)
                 else:
                     message = "road4" + str(index - 16) + str(target_i)
-    ############ ROAD CHECK #########################################################################################
-                # Send "message" variable to your code, put boolean here:
-                valid_drop = True
-    ##################################################################################################################
-                # End Section.
-                print(message)
-                if valid_drop:
 
-                    # Displays placed settlement, positioned so the center of it in on the vertex.
-                    window.blit(placed_road, (target[0]- r_width //2 , target[1] - r_height//2))
-                    pygame.display.update()
-
-                    valid_drop = False
-                    # TO DO: Update gamestate etc
+                client.build_obj(message)
                 dragging_r = False
         else:
             # not turn stuff

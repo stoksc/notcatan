@@ -4,7 +4,6 @@ import queue
 import os
 import time
 import threading
-from multiprocessing import Pool
 import Constants
 
 NUMBER_OF_CLIENTS = Constants.NUMBER_OF_CLIENTS
@@ -13,12 +12,10 @@ class HostControl:
     def __init__(self, serv_addr):
         self.sock = socket.socket(socket.AF_INET,
                              socket.SOCK_STREAM)
-        print('starting up on {} port {}'.format(serv_addr[0],serv_addr[1]),
-              file=sys.stderr)
+        print('starting up on {} port {}'.format(serv_addr[0],serv_addr[1]))
         self.sock.bind(serv_addr)
         self.sock.listen()
         self.clients = []
-        self.processes = []
         self.requests = queue.Queue()
 
     def get_conns(self):
@@ -42,7 +39,7 @@ class HostControl:
             self.requests.put(request)
 
     def send_data(self, connection, message):
-        connection.send(message.encode('utf-8'))
+        connection.send(('|'+message).encode('utf-8'))
 
     def close(self):
         print('closing socket')

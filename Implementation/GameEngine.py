@@ -156,3 +156,4 @@ class GameEngine:
                             player.inventory.grain += 1
                         else:
                             player.inventory.ore += 1
+        return roll

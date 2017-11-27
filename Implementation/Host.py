@@ -4,6 +4,32 @@ from BuildInfo import BuildInfo
 import HostControl
 # import pdb; pdb.set_trace()
 
+# functions to broadcast gamestate changes
+def broadcast_message(message):
+    for player in game_engine.game_state.player_array:
+        host.send_data(player.netid[0], message)
+
+def broadcast_resources():
+    for player in game_engine.game_state.player_array:
+        host.send_data(player.netid[0], ' '.join(['rsrc'+str(player.inventory.brick),
+                                                  str(player.inventory.grain),
+                                                  str(player.inventory.lumber),
+                                                  str(player.inventory.ore),
+                                                  str(player.inventory.wool)]))
+
+def make_build_info(request):
+    if request[:4] == 'road':
+        return BuildInfo(int(request[4]), int(request[5]), int(request[6]), True, False, False)
+    elif request[:4] == 'sett':
+        return BuildInfo(int(request[4]), int(request[5]), int(request[6]), False, True, False)
+    elif request[:4] == 'devc':
+        return BuildInfo(0, 0, 0, False, False, True)
+    elif request[:4] == 'pass':
+        return None
+    else:
+        # TODO: raise a damn error
+        return None
+
 # get player connections
 host = HostControl.HostControl(('localhost', 8000))
 player_addrs = host.get_conns()
@@ -27,41 +53,34 @@ game_engine = GameEngine.GameEngine(player_array)
 
 # build initial 'beginner' setup
 game_engine.build(BuildInfo(0, 0, 3, False, True, False))
+broadcast_message('sett003')
 game_engine.build(BuildInfo(3, 2, 2, False, True, False))
+broadcast_message('sett322')
 game_engine.build(BuildInfo(0, 0, 2, True, False, False))
+broadcast_message('road002')
 game_engine.build(BuildInfo(3, 2, 2, True, False, False))
+broadcast_message('road322')
 game_engine.next_player()
-
 game_engine.build(BuildInfo(1, 1, 2, False, True, False))
+broadcast_message('sett112')
 game_engine.build(BuildInfo(2, 2, 2, False, True, False))
+broadcast_message('sett222')
 game_engine.build(BuildInfo(1, 1, 1, True, False, False))
+broadcast_message('road111')
 game_engine.build(BuildInfo(2, 2, 2, True, False, False))
+broadcast_message('road222')
 game_engine.next_player()
-
-def make_build_info(request):
-    if request[:4] == 'road':
-        return BuildInfo(int(request[4]), int(request[5]), int(request[6]), True, False, False)
-    elif request[:4] == 'sett':
-        return BuildInfo(int(request[4]), int(request[5]), int(request[6]), False, True, False)
-    elif request[:4] == 'devc':
-        return BuildInfo(0, 0, 0, False, False, True)
-    elif request[:4] == 'pass':
-        return None
-    else:
-        # TODO: raise a damn error
-        return None
-
-def broadcast_message(message):
-    for player in game_engine.game_state.player_array:
-        host.send_data(player.netid[0], message)
 
 # start first player's turn and roll first dice
-host.send_data(game_engine.game_state.current_player.netid[0], 'start')
-game_engine.dice_roll()
+host.send_data(game_engine.game_state.current_player.netid[0], 'strt')
+roll = game_engine.dice_roll()
+broadcast_message('roll{}'.format(roll))
+broadcast_resources()
 
 # game loop
 while True:
     if not host.requests.empty():
+        print('<<< reading request')
         current_request = host.requests.get()
         requester_netid = current_request[0]
         if requester_netid == game_engine.game_state.current_player.netid:
@@ -69,18 +88,20 @@ while True:
             if build_info is not None:
                 print(current_request)
                 if game_engine.build(build_info):
-                    print('sending success')
+                    print('>>> broadcasting success')
+                    broadcast_resources()
                     broadcast_message(current_request[1])
                 else:
-                    host.send_data(current_request[0][0], 'err')
+                    print('>>> sending error')
+                    host.send_data(current_request[0][0], 'errr')
             else:
-                host.send_data(current_request[0][0], 'end')
+                print('>>> ending {}\'s turn'.format(game_engine.game_state.current_player.name))
+                host.send_data(current_request[0][0], 'endt')
                 game_engine.next_player()
-                game_engine.dice_roll()
-                for player in game_engine.game_state.player_array:
-                    host.send_data(player.netid[0], ' '.join([str(player.inventory.brick),
-                                                              str(player.inventory.lumber),
-                                                              str(player.inventory.wool),
-                                                              str(player.inventory.grain),
-                                                              str(player.inventory.ore)]))
-                host.send_data(game_engine.game_state.current_player.netid[0], 'start')
+                print('>>> updating resources and alerting players')
+                roll = game_engine.dice_roll()
+                print('>>> sending roll: {}'.format(roll))
+                broadcast_resources()
+                broadcast_message('roll{}'.format(roll))
+                print('>>> starting {}\'s turn'.format(game_engine.game_state.current_player.name))
+                host.send_data(game_engine.game_state.current_player.netid[0], 'strt')

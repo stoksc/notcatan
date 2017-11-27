@@ -195,9 +195,9 @@ while not game_end:
              elif req == 'endt':
                  turn = False
              elif req[0:4] == 'sett':
-                 row, col = int(req[4]), int(req[5])
-                 coord = row_1D(row, col)
-                 window.blit(placed_settlement, (tile_coords[coord][0] - s_width // 2, tile_coords[coord][1] - s_height // 2))
+                 row, col, vertex = int(req[4]), int(req[5]), int(req[6])
+                 index = row_1D(row, col)
+                 window.blit(placed_settlement, (gui_tile_list[index].vlist[vertex][0] - s_width // 2, gui_tile_list[index].vlist[vertex][1] - s_height // 2))
 
     for event in pygame.event.get():
         mouse_pos = pygame.mouse.get_pos()

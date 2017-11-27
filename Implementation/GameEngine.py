@@ -2,6 +2,7 @@
 This class is the GameEngine class. It contains the object repository and the logic that the game follows so that the
 Katan players can experience the functionality of the game itself.
 """
+import random
 import GameState
 import Vertex
 import Edge
@@ -131,4 +132,27 @@ class GameEngine:
             return True
 
     def next_player(self):
-        self.game_state.next_player()
+        self.game_state.current_player_number = (self.game_state.current_player_number + 1) % Constants.NUMBER_OF_CLIENTS
+        self.game_state.current_player = self.game_state.player_array[self.game_state.current_player_number]
+
+    def dice_roll(self):
+        roll = random.randint(1,6) + random.randint(1,6)
+        tiles = []
+        for row in self.game_state.board.tile_array:
+            for tile in row:
+                if tile.value == roll:
+                    tiles.append(tile)
+        for player in self.game_state.player_array:
+            for settlement in player.inventory.settlements:
+                for tile in settlement.vertex.tile_arr:
+                    if tile in tiles:
+                        if tile.type == 'brick':
+                            player.inventory.brick += 1
+                        elif tile.type == 'lumber':
+                            player.inventory.lumber += 1
+                        elif tile.type == 'wool':
+                            player.inventory.wool += 1
+                        elif tile.type == 'grain':
+                            player.inventory.grain += 1
+                        else:
+                            player.inventory.ore += 1

@@ -8,20 +8,31 @@ host = HostControl.HostControl(('localhost', 8000))
 player_addrs = host.get_conns()
 
 player_array = []
-netid = player_addrs[0][1][0] + '.' + str(player_addrs[0][1][1])
+netid = player_addrs[0]
 player1 = Player.Player(netid, "blue", "blue")
-netid = player_addrs[1][1][0] + '.' + str(player_addrs[1][1][1])
+netid = player_addrs[1]
 player2 = Player.Player(netid, "red", "red")
-# player_addrs[2][1][0] + '.' + str(player_addrs[2][1][1])
-# player3 = Player.Player(netid, "white", "Chad Smith")
-# player_addrs[3][1][0] + '.' + str(player_addrs[3][1][1])
-# player4 = Player.Player(netid, "green", "Becky Smith")
 player_array.append(player1)
 player_array.append(player2)
-# player_array.append(player3)
-# player_array.append(player4)
+for player in player_array:
+    player.inventory.lumber += 4
+    player.inventory.brick += 4
+    player.inventory.wool += 2
+    player.inventory.grain += 2
+
 game_engine = GameEngine.GameEngine(player_array)
 
+game_engine.build(BuildInfo(0, 0, 3, False, True, False))
+game_engine.build(BuildInfo(3, 2, 2, False, True, False))
+game_engine.build(BuildInfo(0, 0, 2, True, False, False))
+game_engine.build(BuildInfo(3, 2, 2, True, False, False))
+game_engine.next_player()
+
+game_engine.build(BuildInfo(1, 1, 2, False, True, False))
+game_engine.build(BuildInfo(2, 2, 2, False, True, False))
+game_engine.build(BuildInfo(1, 1, 1, True, False, False))
+game_engine.build(BuildInfo(2, 2, 2, True, False, False))
+game_engine.next_player()
 
 def make_build_info(request):
     if request[:4] == 'road':
@@ -34,29 +45,44 @@ def make_build_info(request):
         return None
     else:
         # TODO: raise a damn error
-        pass
+        return None
 
+# fill their inventories with resources
 player1.inventory.brick = 1000
 player1.inventory.lumber = 1000
 player1.inventory.wool = 1000
 player1.inventory.grain = 1000
 player1.inventory.ore = 1000
+player2.inventory.brick = 1000
+player2.inventory.lumber = 1000
+player2.inventory.wool = 1000
+player2.inventory.grain = 1000
+player2.inventory.ore = 1000
+
+# start first player's turn
+host.send_data(game_engine.game_state.current_player.netid[0], 'start')
 
 while True:
     if not host.requests.empty():
         current_request = host.requests.get()
-        requester_netid = current_request[0][1][0] + '.' + str(current_request[0][1][1])
+        requester_netid = current_request[0]
         if requester_netid == game_engine.game_state.current_player.netid:
             build_info = make_build_info(current_request[1])
             if build_info is not None:
                 print(current_request)
-                print(game_engine.build(build_info))
+                if game_engine.build(build_info):
+                    print('sending success')
+                    host.send_data(current_request[0][0], 'true')
+                else:
+                    host.send_data(current_request[0][0], 'false')
             else:
+                host.send_data(current_request[0][0], 'end')
                 game_engine.next_player()
-
-
-#                                               r, c, i, edge,  vert, devc
-print(str(game_engine.build(BuildInfo(0, 0, 0, False, True, False))))
-print(str(game_engine.build(BuildInfo(0, 0, 0, False, True, False))))
-print(str(game_engine.build(BuildInfo(0, 0, 0, True, False, False))))
-print(str(game_engine.build(BuildInfo(0, 0, 0, True, False, False))))
+                game_engine.dice_roll()
+                for player in game_engine.game_state.player_array:
+                    host.send_data(player.netid[0], ' '.join([str(player.inventory.brick),
+                                                              str(player.inventory.lumber),
+                                                              str(player.inventory.wool),
+                                                              str(player.inventory.grain),
+                                                              str(player.inventory.ore)]))
+                host.send_data(game_engine.game_state.current_player.netid[0], 'start')

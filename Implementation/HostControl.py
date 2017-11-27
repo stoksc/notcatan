@@ -41,7 +41,8 @@ class HostControl:
             request = (client, data)
             self.requests.put(request)
 
-    def rec_data(self, client):
+    def send_data(self, connection, message):
+        connection.send(message.encode('utf-8'))
 
     def close(self):
         print('closing socket')

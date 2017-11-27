@@ -20,6 +20,9 @@ class ClientControl():
         byte_msg = msg.encode('utf-8')
         self.sock.sendall(byte_msg)
 
+    def rec_result(self):
+        return self.sock.recv(1024).decode('utf-8')
+
     def close(self):
         print("closing socket")
         self.sock.close()
@@ -27,7 +30,9 @@ class ClientControl():
 
 if __name__ == '__main__':
     c = ClientControl()
+    print(c.rec_result())
     while input('more? ') != 'no':
         c.send_build_obj()
+        print(c.rec_result())
     c.close()
     quit()

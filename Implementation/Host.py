@@ -43,10 +43,10 @@ player2 = Player.Player(netid, 'red', 'red')
 player_array.append(player1)
 player_array.append(player2)
 for player in player_array:
-    player.inventory.lumber += 4
-    player.inventory.brick += 4
-    player.inventory.wool += 2
-    player.inventory.grain += 2
+    player.inventory.lumber += 400
+    player.inventory.brick += 400
+    player.inventory.wool += 200
+    player.inventory.grain += 200
 
 # initialize game
 game_engine = GameEngine.GameEngine(player_array)
@@ -89,10 +89,14 @@ while True:
                 print(current_request)
                 if game_engine.build(build_info):
                     print('>>> broadcasting success')
+                    for vertex in game_engine.game_state.invalid_vertices_to_build_array:
+                        print(vertex)
                     broadcast_resources()
                     broadcast_message(current_request[1])
                 else:
                     print('>>> sending error')
+                    for vertex in game_engine.game_state.invalid_vertices_to_build_array:
+                        print(vertex)
                     host.send_data(current_request[0][0], 'errr')
             else:
                 print('>>> ending {}\'s turn'.format(game_engine.game_state.current_player.name))

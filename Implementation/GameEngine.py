@@ -92,9 +92,11 @@ class GameEngine:
         """
         if type(object_to_build_on) is Edge.Edge and object_to_build_on.road is None:
             return True
-        elif type(object_to_build_on) is Vertex.Vertex and object_to_build_on.settlement is None and\
-                self.game_state.vertex_check(object_to_build_on):
-            return True
+        elif type(object_to_build_on) is Vertex.Vertex and object_to_build_on.settlement is None:
+            if self.game_state.vertex_check(object_to_build_on):
+                return True
+            else:
+                return False 
         elif type(object_to_build_on) is Vertex.Vertex and object_to_build_on.settlement.owner ==\
                 self.game_state.current_player:
             return True

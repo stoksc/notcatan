@@ -130,7 +130,7 @@ def in_region(rect, mouse_pos):
     else:
         return False
 
-#def drag(rect, mouse_pos):
+######## window instantiation
     
 pygame.init()
 window = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -140,7 +140,7 @@ game_end = False
 window.fill(BLUE)
 
 # PASS BUTTON #####
-pass_button = rect(Surface, color, Rect, width=100)
+pass_button = rect(window, RED, Rect, width=100)
 window.blit(pass_button, (0, 0))
 
 road_stack = pygame.image.load('assets\\placeholder_road.png').convert_alpha()

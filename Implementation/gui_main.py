@@ -180,6 +180,8 @@ placed_settlement = pygame.image.load('assets\\placeholder_settlement.png').conv
 held_settlement = placed_settlement.get_rect(topleft=(800,600))
 
 dragging_r = False
+placed_road = pygame.image.load('assets\\placeholder_road.png').convert_alpha()
+held_road = placed_road.get_rect(topleft=(800,600))
 
 pygame.display.update()
 turn = False

@@ -140,7 +140,7 @@ game_end = False
 window.fill(BLUE)
 
 # PASS BUTTON #####
-pass_button = rect(window, RED, Rect, width=100)
+pass_button = pygame.draw.rect(window, RED, width=100)
 window.blit(pass_button, (0, 0))
 
 road_stack = pygame.image.load('assets\\placeholder_road.png').convert_alpha()

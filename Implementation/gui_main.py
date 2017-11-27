@@ -9,11 +9,11 @@ BLUE = (28, 107, 160)
 t_width = 100
 t_height = 116
 # Settlement dimensions.
-s_width = 50
-s_height = 53
+s_width = 37
+s_height = 39
 # Road dimensions
-r_width = 50
-r_height = 29
+r_width = 37
+r_height = 21
 
 # top left coordinates for first tile
 initial_x = 500

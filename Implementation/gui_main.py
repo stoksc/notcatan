@@ -3,6 +3,7 @@ import pygame, sys, math, ClientControl
 WIDTH = 1000 #original 1250
 HEIGHT = 704
 
+RED = (255, 0, 0)
 BLUE = (28, 107, 160)
 # Hex dimensions.
 t_width = 100
@@ -137,6 +138,11 @@ pygame.display.set_caption("K A T A N (GUI Test)")
 clock = pygame.time.Clock()
 game_end = False
 window.fill(BLUE)
+
+# PASS BUTTON #####
+pass_button = rect(Surface, color, Rect, width=100)
+window.blit(pass_button, (0, 0))
+
 road_stack = pygame.image.load('assets\\placeholder_road.png').convert_alpha()
 settlement_stack = pygame.image.load('assets\\placeholder_settlement.png').convert_alpha()
 temp_tile = pygame.image.load('assets\\placeholder_tile.png').convert_alpha()
@@ -220,7 +226,9 @@ while not game_end:
         if turn:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    if settlement_stack_rect.collidepoint(event.pos):
+                    if pass_button.collidepoint(event.pos):
+                        client.send_build_obj('pass')
+                    elif settlement_stack_rect.collidepoint(event.pos):
                         dragging_s = True
 
             # If a settlement is dragged and dropped:

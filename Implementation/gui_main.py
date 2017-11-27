@@ -207,7 +207,7 @@ while not game_end:
              elif req == 'endt':
                  turn = False
              elif req[0:4] == 'sett':
-                 row, col, vertex, p_id = int(req[4]), int(req[5]), int(req[6]), reg[7]
+                 row, col, vertex, p_id = int(req[4]), int(req[5]), int(req[6]), req[7]
                  index = row_1D(row, col)
                  placed_settlement = pygame.image.load('assets\\SettlementP' + p_id + '.png').convert_alpha()
                  window.blit(placed_settlement, (gui_tile_list[index].vlist[vertex][0] - s_width // 2, gui_tile_list[index].vlist[vertex][1] - s_height // 2))

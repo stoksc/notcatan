@@ -243,7 +243,7 @@ while not game_end:
                 else:
                     message = "sett4" + str(index-16) + str(target_i)
 
-                client.build_obj(message)
+                client.send_build_obj(message)
 
                 print(message)
                 dragging_s = False
@@ -281,7 +281,7 @@ while not game_end:
                 else:
                     message = "road4" + str(index - 16) + str(target_i)
 
-                client.build_obj(message)
+                client.send_build_obj(message)
                 dragging_r = False
         else:
             # not turn stuff

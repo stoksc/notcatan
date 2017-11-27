@@ -36,9 +36,7 @@ class GameState:
 
     def initial_setup(self):
         """
-        The Game_State class invokes this method in order to proceed with the logic and initialization of the beginner
-        setup for a Settlers of Definitely Not Katan game.
-
+        This method sets the tile types and values for the default setup.
         Args:
             None.
         Returns:
@@ -47,27 +45,56 @@ class GameState:
         tile_type_array = [self.board.tile_array[0][0], self.board.tile_array[2][1], \
                                self.board.tile_array[2][3], self.board.tile_array[4][2]]
         for tile in tile_type_array:
-            tile.type = "lumber"
+            tile.type = 'lumber'
 
         tile_type_array = [self.board.tile_array[0][1], self.board.tile_array[1][3], \
                                self.board.tile_array[3][1], self.board.tile_array[3][2]]
         for tile in tile_type_array:
-            tile.type = "wool"
+            tile.type = 'wool'
 
         tile_type_array = [self.board.tile_array[0][2], self.board.tile_array[2][2], \
                                self.board.tile_array[2][4], self.board.tile_array[4][1]]
         for tile in tile_type_array:
-            tile.type = "grain"
+            tile.type = 'grain'
 
         tile_type_array = [self.board.tile_array[1][0], self.board.tile_array[1][2], \
                                self.board.tile_array[3][0]]
         for tile in tile_type_array:
-            tile.type = "brick"
+            tile.type = 'brick'
 
         tile_type_array = [self.board.tile_array[1][1], self.board.tile_array[3][3], \
                                self.board.tile_array[4][0]]
         for tile in tile_type_array:
-            tile.type = "ore"
+            tile.type = 'ore'
+
+        # row 1
+        self.board.tile_array[0][0].value = 11
+        self.board.tile_array[0][1].value = 12
+        self.board.tile_array[0][2].value = 9
+
+        # row 2
+        self.board.tile_array[1][0].value = 4
+        self.board.tile_array[1][1].value = 6
+        self.board.tile_array[1][2].value = 5
+        self.board.tile_array[1][3].value = 10
+
+        # row 3
+        self.board.tile_array[2][0].value = 0
+        self.board.tile_array[2][1].value = 3
+        self.board.tile_array[2][2].value = 11
+        self.board.tile_array[2][3].value = 4
+        self.board.tile_array[2][4].value = 8
+
+        # row 4
+        self.board.tile_array[3][0].value = 8
+        self.board.tile_array[3][1].value = 10
+        self.board.tile_array[3][2].value = 9
+        self.board.tile_array[3][3].value = 3
+
+        # row 5
+        self.board.tile_array[4][0].value = 5
+        self.board.tile_array[4][1].value = 2
+        self.board.tile_array[4][2].value = 6
 
     def add_invalid_vertices_to_build(self, vertex):
         """

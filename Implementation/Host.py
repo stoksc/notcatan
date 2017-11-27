@@ -4,14 +4,16 @@ from BuildInfo import BuildInfo
 import HostControl
 # import pdb; pdb.set_trace()
 
+# get player connections
 host = HostControl.HostControl(('localhost', 8000))
 player_addrs = host.get_conns()
 
+# initialize players
 player_array = []
 netid = player_addrs[0]
-player1 = Player.Player(netid, "blue", "blue")
+player1 = Player.Player(netid, 'blue', 'blue')
 netid = player_addrs[1]
-player2 = Player.Player(netid, "red", "red")
+player2 = Player.Player(netid, 'red', 'red')
 player_array.append(player1)
 player_array.append(player2)
 for player in player_array:
@@ -20,8 +22,10 @@ for player in player_array:
     player.inventory.wool += 2
     player.inventory.grain += 2
 
+# initialize game
 game_engine = GameEngine.GameEngine(player_array)
 
+# build initial 'beginner' setup
 game_engine.build(BuildInfo(0, 0, 3, False, True, False))
 game_engine.build(BuildInfo(3, 2, 2, False, True, False))
 game_engine.build(BuildInfo(0, 0, 2, True, False, False))
@@ -47,21 +51,15 @@ def make_build_info(request):
         # TODO: raise a damn error
         return None
 
-# fill their inventories with resources
-player1.inventory.brick = 1000
-player1.inventory.lumber = 1000
-player1.inventory.wool = 1000
-player1.inventory.grain = 1000
-player1.inventory.ore = 1000
-player2.inventory.brick = 1000
-player2.inventory.lumber = 1000
-player2.inventory.wool = 1000
-player2.inventory.grain = 1000
-player2.inventory.ore = 1000
+def broadcast_message(message):
+    for player in game_engine.game_state.player_array:
+        host.send_data(player.netid[0], message)
 
-# start first player's turn
+# start first player's turn and roll first dice
 host.send_data(game_engine.game_state.current_player.netid[0], 'start')
+game_engine.dice_roll()
 
+# game loop
 while True:
     if not host.requests.empty():
         current_request = host.requests.get()
@@ -72,9 +70,9 @@ while True:
                 print(current_request)
                 if game_engine.build(build_info):
                     print('sending success')
-                    host.send_data(current_request[0][0], 'true')
+                    broadcast_message(current_request[1])
                 else:
-                    host.send_data(current_request[0][0], 'false')
+                    host.send_data(current_request[0][0], 'err')
             else:
                 host.send_data(current_request[0][0], 'end')
                 game_engine.next_player()

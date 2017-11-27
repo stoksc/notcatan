@@ -140,8 +140,9 @@ game_end = False
 window.fill(BLUE)
 
 # PASS BUTTON #####
-pass_button = pygame.draw.rect(window, RED, width=100)
+pass_button = pygame.image.load('assets\\placeholder_tile.png').convert_alpha()
 window.blit(pass_button, (0, 0))
+pass_button_rect = pass_button.get_rect(topleft=(0, 0))
 
 road_stack = pygame.image.load('assets\\placeholder_road.png').convert_alpha()
 settlement_stack = pygame.image.load('assets\\placeholder_settlement.png').convert_alpha()
@@ -226,7 +227,7 @@ while not game_end:
         if turn:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    if pass_button.collidepoint(event.pos):
+                    if pass_button_rect.collidepoint(event.pos):
                         client.send_build_obj('pass')
                     elif settlement_stack_rect.collidepoint(event.pos):
                         dragging_s = True

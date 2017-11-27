@@ -43,10 +43,10 @@ player2 = Player.Player(netid, 'red', 'red')
 player_array.append(player1)
 player_array.append(player2)
 for player in player_array:
-    player.inventory.lumber += 4
-    player.inventory.brick += 4
-    player.inventory.wool += 2
-    player.inventory.grain += 2
+    player.inventory.lumber += 400
+    player.inventory.brick += 400
+    player.inventory.wool += 200
+    player.inventory.grain += 200
 
 # initialize game
 game_engine = GameEngine.GameEngine(player_array)
@@ -86,11 +86,15 @@ while True:
         if requester_netid == game_engine.game_state.current_player.netid:
             build_info = make_build_info(current_request[1])
             if build_info is not None:
-                print(current_request)
-                if game_engine.build(build_info):
+                result = game_engine.build(build_info)
+                if result is True:
                     print('>>> broadcasting success')
                     broadcast_resources()
                     broadcast_message(current_request[1])
+                elif result == 'city':
+                    print('>>> broadcasting success')
+                    new_message = 'city' + current_request[1][4::]
+                    broadcast_message(new_message)
                 else:
                     print('>>> sending error')
                     host.send_data(current_request[0][0], 'errr')

@@ -26,7 +26,7 @@ class GameState:
         """
         self.board = Board.Board()
         self.player_array = player_array
-        self.invalid_vertices_to_build_array = set(())
+        self.invalid_vertices_to_build_array = []
         self.current_player = self.player_array[0]
         self.current_player_number = 0
         self.robber_tile = None
@@ -106,7 +106,13 @@ class GameState:
         Returns:
             None
         """
-        self.invalid_vertices_to_build_array.union(vertex.adj_vertices)
+        if vertex in self.invalid_vertices_to_build_array:
+            self.invalid_vertices_to_build_array.append(vertex)
+        for v1 in vertex.adj_vertices:
+            if v1 in self.invalid_vertices_to_build_array:
+                pass
+            else:
+                self.invalid_vertices_to_build_array.append(v1)
 
     def vertex_check(self, vertex):
         """
@@ -119,4 +125,7 @@ class GameState:
         Returns:
             bool: if the vertex is in the invalid_vertices_to_build_array, returns False; else True.
         """
-        return not self.invalid_vertices_to_build_array.__contains__(vertex)
+        if vertex in self.invalid_vertices_to_build_array:
+            return False
+        else:
+            return True

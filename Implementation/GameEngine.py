@@ -96,7 +96,7 @@ class GameEngine:
             if self.game_state.vertex_check(object_to_build_on):
                 return True
             else:
-                return False 
+                return False
         elif type(object_to_build_on) is Vertex.Vertex and object_to_build_on.settlement.owner ==\
                 self.game_state.current_player:
             return True
@@ -118,18 +118,24 @@ class GameEngine:
             self.game_state.current_player.inventory.add_dev_card(Development_Card.Development_Card())
             return True
         elif type(object_to_build_on) is Vertex.Vertex and object_to_build_on.settlement is None:
-            self.game_state.add_invalid_vertices_to_build(object_to_build_on)
-            object_to_build_on.settlement = Settlement.Settlement(object_to_build_on)
-            self.game_state.current_player.inventory.add_settlement(object_to_build_on.settlement)
-            return True
+            if object_to_build_on.city is None:
+                self.game_state.add_invalid_vertices_to_build(object_to_build_on)
+                object_to_build_on.settlement = Settlement.Settlement(object_to_build_on)
+                object_to_build_on.settlement.owner = self.game_state.current_player
+                self.game_state.current_player.inventory.add_settlement(object_to_build_on.settlement)
+                return True
+            else:
+                return False
         elif type(object_to_build_on) is Vertex.Vertex and object_to_build_on.settlement.owner ==\
                 self.game_state.current_player:
             object_to_build_on.settlement = None
             object_to_build_on.city = City.City(object_to_build_on)
+            object_to_build_on.city.owner = self.game_state.current_player
             self.game_state.current_player.inventory.add_city(object_to_build_on.city)
-            return True
+            return 'city'
         elif type(object_to_build_on) is Edge.Edge:
             object_to_build_on.road = Road.Road(object_to_build_on)
+            object_to_build_on.road.owner = self.game_state.current_player
             self.game_state.current_player.inventory.add_road(object_to_build_on.road)
             return True
 

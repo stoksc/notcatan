@@ -86,17 +86,17 @@ while True:
         if requester_netid == game_engine.game_state.current_player.netid:
             build_info = make_build_info(current_request[1])
             if build_info is not None:
-                print(current_request)
-                if game_engine.build(build_info):
+                result = game_engine.build(build_info)
+                if result is True:
                     print('>>> broadcasting success')
-                    for vertex in game_engine.game_state.invalid_vertices_to_build_array:
-                        print(vertex)
                     broadcast_resources()
                     broadcast_message(current_request[1])
+                elif result == 'city':
+                    print('>>> broadcasting success')
+                    new_message = 'city' + current_request[1][4::]
+                    broadcast_message(new_message)
                 else:
                     print('>>> sending error')
-                    for vertex in game_engine.game_state.invalid_vertices_to_build_array:
-                        print(vertex)
                     host.send_data(current_request[0][0], 'errr')
             else:
                 print('>>> ending {}\'s turn'.format(game_engine.game_state.current_player.name))

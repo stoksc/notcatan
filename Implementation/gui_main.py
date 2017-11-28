@@ -256,7 +256,7 @@ window.blit(road_stack, (690, 634))
 road_stack_rect = road_stack.get_rect(topleft=(690, 634))
 
 window.blit(city_stack, (770, 634))
-city_stack_rect = settlement_stack.get_rect(topleft=(770, 600))
+city_stack_rect = settlement_stack.get_rect(topleft=(770, 634))
 
 ## ???
 upgraded_cities = pygame.sprite.Group()
@@ -277,11 +277,9 @@ held_road = placed_road.get_rect(topleft=(800,600))
 
 window_text = pygame.font.SysFont('Georgia', 20)
 resource_bg = pygame.image.load('assets\\resourceBG.png')
-#vp_display = window_text.render('A quick brown fox', False, (0,0,0))
+dice_bg = pygame.image.load('assets\\DiceBG.png')
+vp_bg = pygame.image.load('assets\\DiceBG.png')
 
-#dice_display = window_text.render('A quick brown fox', False, (0,0,0))
-
-#window.blit(vp_display, (20,600))
 
 
 pygame.display.update()
@@ -337,9 +335,19 @@ while not game_end:
                  brick, grain, lumber, ore, wool = r_list[0], r_list[1], r_list[2], r_list[3], r_list[4]
                  resource_display = window_text.render(brick + "    " + lumber +"    " +
                                                        grain + "     " + wool + "     " + ore, False, (0, 0, 0))
-                 #window.blit(resource_bg, (0, 575))
-                 #window.blit(resource_display, (20, 600))
-
+                 window.blit(resource_bg, (0, 575))
+                 window.blit(resource_display, (20, 600))
+             elif req[0:4] == 'roll':
+                 dice = req[4::]
+                 dice_display = window_text.render(dice, False, (0, 0, 0))
+                 window.blit(dice_bg, (320, 575))
+                 window.blit(dice_display, (340, 600))
+             elif req[0:4] == 'pvps':
+                 if turn:
+                     vp = req[4::]
+                     vp_display = window_text.render("VP: " + vp, False, (0, 0 , 0))
+                     window.blit(vp_bg, (0, 0))
+                     window.blit(vp_display, (0, 20))
              elif req[0:4] == 'errr':
                  #TO DO: Print error message in a log
                  print("Build Attempt Failed")

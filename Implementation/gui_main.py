@@ -49,7 +49,7 @@ def get_tile_pos(t_count):
     current_x += t_width
     return (current_x, current_y)
 
-def row_1D(num1, num2):
+def to_1D(num1, num2):
     if num1 == 0:
         return num2
     elif num1 == 1:
@@ -60,6 +60,61 @@ def row_1D(num1, num2):
         return num2 + 12
     else:
         return num2 + 16
+
+def to_2D(num):
+    if i < 3:
+        return "0" + str(i)
+    elif i < 7:
+        return "1" + str(i - 3)
+    elif i < 12:
+        return "2" + str(i - 7)
+    elif i < 16:
+        return "3" + str(i - 12)
+    else:
+        return "4" + str(i - 16)
+
+### Sprite Groups #############
+to_render = pygame.sprite.Group()
+to_derender = pygame.sprite.Group()
+settlement_sprites = pygame.sprite.Group()
+held_piece = pygame.sprite.Group()
+
+class Sett_Sprite(pygame.sprite.Sprite):
+    def __init__(self, img, pos):
+        super().__init__()
+        self.width = 37
+        self.height = 39
+        self.image = pygame.image.load(img).convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (pos)
+
+    def draw(self, window):
+        window.blit(self.image, self.rect)
+
+class Road_Sprite(pygame.sprite.Sprite):
+    def __init__(self, img, pos):
+        super().__init__()
+        self.width = 37
+        self.height = 21
+        self.image = pygame.image.load(img).convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (pos)
+
+    def draw(self, window):
+        window.blit(self.image, self.rect)
+
+class City_Sprite(pygame.sprite.Sprite):
+    def __init__(self, img, pos):
+        super().__init__()
+        self.width = 37
+        self.height = 39
+        self.image = pygame.image.load(img).convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (pos)
+
+    def draw(self, window):
+        window.blit(self.image, self.rect)
+
 
 
 # Formulas work for all regular hexagons.
@@ -134,7 +189,7 @@ def in_region(rect, mouse_pos):
     
 pygame.init()
 window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("K A T A N (GUI Test)")
+pygame.display.set_caption("Settlers of Notcatan")
 clock = pygame.time.Clock()
 game_end = False
 window.fill(BLUE)
@@ -147,6 +202,8 @@ pass_button_rect = pass_button.get_rect(topleft=(0, 0))
 # loading images #####
 road_stack = pygame.image.load('assets\\placeholder_road.png').convert_alpha()
 settlement_stack = pygame.image.load('assets\\placeholder_settlement.png').convert_alpha()
+city_stack = pygame.image.load('assets\\CityP0.png').convert_alpha()
+
 temp_tile = pygame.image.load('assets\\placeholder_tile.png').convert_alpha()
 
 
@@ -181,8 +238,14 @@ road_stack_rect = road_stack.get_rect(topleft=(300, 600))
 window.blit(settlement_stack, (800, 600))
 settlement_stack_rect = settlement_stack.get_rect(topleft=(800, 600))
 
+window.blit(city_stack, (500, 600))
+city_stack_rect = settlement_stack.get_rect(topleft=(500, 600))
+
+## ???
 upgraded_cities = pygame.sprite.Group()
+###
 dragging_s = False
+dragging_c = False
 
 h_s = pygame.sprite.Sprite()
 h_s.image = pygame.image.load('assets\\placeholder_settlement.png').convert_alpha()
@@ -208,14 +271,35 @@ while not game_end:
                  turn = False
              elif req[0:4] == 'sett':
                  row, col, vertex, p_id = int(req[4]), int(req[5]), int(req[6]), req[7]
-                 index = row_1D(row, col)
-                 placed_settlement = pygame.image.load('assets\\SettlementP' + p_id + '.png').convert_alpha()
-                 window.blit(placed_settlement, (gui_tile_list[index].vlist[vertex][0] - s_width // 2, gui_tile_list[index].vlist[vertex][1] - s_height // 2))
+                 index = to_1D(row, col)
+
+                 s_sprite = Sett_Sprite('assets\\SettlementP' + p_id + '.png',
+                (gui_tile_list[index].vlist[vertex][0] - s_width // 2, gui_tile_list[index].vlist[vertex][1] - s_height // 2))
+                 settlement_sprites.add(s_sprite)
+                 settlement_sprites.draw(window)
+
              elif req[0:4] == 'road':
                  row, col, edge, p_id = int(req[4]), int(req[5]), int(req[6]), req[7]
-                 index = row_1D(row, col)
-                 placed_road = pygame.image.load('assets\\RoadP' + p_id + '-' + str(edge) + '.png').convert_alpha()
-                 window.blit(placed_road, (gui_tile_list[index].elist[edge][0] - s_width // 2, gui_tile_list[index].elist[edge][1] - s_height // 2))
+                 index = to_1D(row, col)
+                 r_sprite = Sett_Sprite('assets\\RoadP' + p_id + '-' + str(edge) + '.png',
+                                        (gui_tile_list[index].elist[edge][0] - r_width // 2, gui_tile_list[index].elist[edge][1] - r_height // 2))
+                 to_render.add(r_sprite)
+                 to_render.draw(window)
+                 settlement_sprites.draw(window)
+
+             elif req[0:4] == 'city':
+                 row, col, vertex, p_id = int(req[4]), int(req[5]), int(req[6]), req[7]
+                 index = to_1D(row, col)
+
+                 c_sprite = City_Sprite('assets\\CityP' + p_id + '.png',
+                                        (gui_tile_list[index].vlist[vertex][0] - s_width // 2,
+                                         gui_tile_list[index].vlist[vertex][1] - s_height // 2))
+                 for sprite in settlement_sprites:
+                     if pygame.sprite.collide_rect(c_sprite, sprite):
+                         sprite.kill()
+                 to_render.add(c_sprite)
+                 to_render.draw(window)
+                 settlement_sprites.draw(window)
              elif req[0:4] == 'errr':
                  #TO DO: Print error message in a log
                  print("Build Attempt Failed")
@@ -228,7 +312,7 @@ while not game_end:
 
         if event.type == pygame.QUIT:
             game_end = True
-        #### Hex Logic
+        #### Vertex Logic
         if turn:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
@@ -236,7 +320,8 @@ while not game_end:
                         client.send_build_obj('pass')
                     elif settlement_stack_rect.collidepoint(event.pos):
                         dragging_s = True
-
+                    elif city_stack_rect.collidepoint(event.pos):
+                        dragging_c = True
             # If a settlement is dragged and dropped:
             elif event.type == pygame.MOUSEBUTTONUP and dragging_s:
                 # Find tile closest to cursor, then find vertex of tile closest to cursor.
@@ -246,6 +331,8 @@ while not game_end:
                 target_i = closest_tile.closest_v(m_x, m_y)[1]
 
                 # Changes tile address from 1D array to 2D array.
+                # message = "sett" + to_2D(index) + str(target_i)
+
                 if index < 3:
                     message = "sett0" + str(index) + str(target_i)
                 elif index < 7:
@@ -261,6 +348,31 @@ while not game_end:
 
                 print(message)
                 dragging_s = False
+            elif event.type == pygame.MOUSEBUTTONUP and dragging_c:
+                # Find tile closest to cursor, then find vertex of tile closest to cursor.
+                index = closest_t(m_x, m_y)
+                closest_tile = gui_tile_list[index]
+                target = closest_tile.closest_v(m_x, m_y)[0]
+                target_i = closest_tile.closest_v(m_x, m_y)[1]
+
+                # Changes tile address from 1D array to 2D array.
+                # message = "city" + to_2D(index) + str(target_i)
+
+                if index < 3:
+                    message = "city0" + str(index) + str(target_i)
+                elif index < 7:
+                    message = "city1" + str(index-3) + str(target_i)
+                elif index < 12:
+                    message = "city2" + str(index-7) + str(target_i)
+                elif index < 16:
+                    message = "city3" + str(index-12) + str(target_i)
+                else:
+                    message = "city4" + str(index-16) + str(target_i)
+
+                client.send_build_obj(message)
+
+                print(message)
+                dragging_c = False
             elif event.type == pygame.MOUSEMOTION:
                 if dragging_s:
                     dragx, dragy = event.pos
@@ -283,6 +395,8 @@ while not game_end:
                 closest_tile = gui_tile_list[index]
                 target = closest_tile.closest_e(m_x, m_y)[0]
                 target_i = closest_tile.closest_e(m_x, m_y)[1]
+
+                # message = "road" + to_2D(index) + str(target_i)
 
                 if index < 3:
                     message = "road0" + str(index) + str(target_i)

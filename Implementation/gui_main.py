@@ -49,6 +49,7 @@ def get_tile_pos(t_count):
     current_x += t_width
     return (current_x, current_y)
 
+# Converts from 2D array to 1D.
 def to_1D(num1, num2):
     if num1 == 0:
         return num2
@@ -61,6 +62,7 @@ def to_1D(num1, num2):
     else:
         return num2 + 16
 
+# Converts from 1D array to 1D.
 def to_2D(num):
     if i < 3:
         return "0" + str(i)
@@ -73,14 +75,14 @@ def to_2D(num):
     else:
         return "4" + str(i - 16)
 
-### Sprite Groups #############
+# Sprite groups for drawing().
 to_render = pygame.sprite.Group()
 to_derender = pygame.sprite.Group()
 settlement_sprites = pygame.sprite.Group()
 held_piece = pygame.sprite.Group()
 
 
-
+# Sprite classes for assets that need to be refreshed by draw().
 class Sett_Sprite(pygame.sprite.Sprite):
     def __init__(self, img, pos):
         super().__init__()
@@ -162,6 +164,7 @@ class GuiTile:
                 closest_index = i
         return [self.elist[closest_index], closest_index]
 
+# Returns the closest 1D array tile to mouse_pos.
 def closest_t(mouse_x, mouse_y):
     closest_index = 0
     smallest_distance = t_width * 5
@@ -173,13 +176,14 @@ def closest_t(mouse_x, mouse_y):
             closest_index = i
     return closest_index
 
+# Unused interface
 def draggable(rect, mouse_pos, event):
     if (event == pygame.MOUSEBUTTONDOWN and in_region(rect, mouse_pos)):
         return True
     else:
         return False
 
-    # Checks if mouse position falls within rectangle coordinates.
+# Checks if mouse position falls within rectangle coordinates.
 def in_region(rect, mouse_pos):
     if (rect.left < mouse_pos[0] < rect.right and
                     rect.top < mouse_pos[1] < rect.bottom):
@@ -205,6 +209,7 @@ resource_bar = pygame.image.load('assets\\ResourceBar.png').convert_alpha()
 dice_icon = pygame.image.load('assets\\DiceIcon.png').convert_alpha()
 skip_button = pygame.image.load('assets\\SkipButton.png').convert_alpha()
 
+# Creates sprite group array for each player, for refreshing draw() based on turn.
 sprite_pieces_list = []
 for i in range(4):
     sg = pygame.sprite.Group()
@@ -214,24 +219,10 @@ for i in range(4):
     sprite_pieces_list.append(sg)
 
 temp_tile = pygame.image.load('assets\\placeholder_tile.png').convert_alpha()
-# Text, buttons
 
 # Draws the board. (Generates rectangle, gui tile object and appends to respective lists.)
-
 for i in range(19):
     tile_file = "assets\\Tile" + to_2D(i) + ".png"
-
-# for i in range(19):
-#     if i < 3:
-#         tile_file = "assets\\Tile0" + str(i) + ".png"
-#     elif i < 7:
-#         tile_file = "assets\\Tile1" + str(i - 3) + ".png"
-#     elif i < 12:
-#         tile_file = "assets\\Tile2" + str(i - 7) + ".png"
-#     elif i < 16:
-#         tile_file = "assets\\Tile3" + str(i - 12) + ".png"
-#     else:
-#         tile_file = "assets\\Tile4" + str(i - 16) + ".png"
 
     temp_tile = pygame.image.load(tile_file).convert_alpha()
     new_pos = get_tile_pos(i)
@@ -243,6 +234,7 @@ for i in range(19):
     tile_rect_list.append(temp_tile_rect)
     gui_tile_list.append(temp_tile_guiTile)
 
+# Updates window to display resource assets.
 window.blit(resource_bar, (0, 634))
 window.blit(dice_icon, (320,634))
 
@@ -258,23 +250,22 @@ road_stack_rect = road_stack.get_rect(topleft=(690, 634))
 window.blit(city_stack, (770, 634))
 city_stack_rect = settlement_stack.get_rect(topleft=(770, 634))
 
-## ???
-upgraded_cities = pygame.sprite.Group()
-###
+# Booleans for settlement and city "dragging".
 dragging_s = False
 dragging_c = False
 
+# Not rendering properly - Meant for refreshing "dragged" object.
 h_s = pygame.sprite.Sprite()
 h_s.image = pygame.image.load('assets\\placeholder_settlement.png').convert_alpha()
 placed_settlement = pygame.image.load('assets\\placeholder_settlement.png').convert_alpha()
 
 
 held_settlement = placed_settlement.get_rect(topleft=(800,600))
-
 dragging_r = False
+
+# loads images for assets that can only be instantiated at pygame.init()
 placed_road = pygame.image.load('assets\\placeholder_road.png').convert_alpha()
 held_road = placed_road.get_rect(topleft=(800,600))
-
 window_text = pygame.font.SysFont('Georgia', 20)
 resource_bg = pygame.image.load('assets\\resourceBG.png')
 dice_bg = pygame.image.load('assets\\DiceBG.png')
@@ -284,10 +275,14 @@ vp_bg = pygame.image.load('assets\\DiceBG.png')
 
 pygame.display.update()
 turn = False
+
+# Creates client control object for interactions with host.
 client = ClientControl.ClientControl()
 while not game_end:
     while not client.requests.empty():
          current_requests = client.requests.get().split('|')
+
+         # Reads requests, and updates the board assets to reflect the current gamestate.
          for req in current_requests:
              if req == '':
                  pass
@@ -295,6 +290,8 @@ while not game_end:
                  turn = True
              elif req == 'endt':
                  turn = False
+
+             # Settlement request.
              elif req[0:4] == 'sett':
                  row, col, vertex, p_id = int(req[4]), int(req[5]), int(req[6]), req[7]
                  index = to_1D(row, col)
@@ -304,6 +301,7 @@ while not game_end:
                  settlement_sprites.add(s_sprite)
                  settlement_sprites.draw(window)
 
+             # Road request.
              elif req[0:4] == 'road':
                  row, col, edge, p_id = int(req[4]), int(req[5]), int(req[6]), req[7]
                  index = to_1D(row, col)
@@ -313,6 +311,7 @@ while not game_end:
                  to_render.draw(window)
                  settlement_sprites.draw(window)
 
+             # City request.
              elif req[0:4] == 'city':
                  print('here')
                  row, col, vertex, p_id = int(req[4]), int(req[5]), int(req[6]), req[7]
@@ -327,9 +326,13 @@ while not game_end:
                  to_render.add(c_sprite)
                  to_render.draw(window)
                  settlement_sprites.draw(window)
+
+             # Turn request to redraw current player's "pieces stacks".
              elif req[0:4] == 'turn':
                  p_id = int(req[4])
                  sprite_pieces_list[p_id].draw(window)
+
+             # Resource request to update resource display according to player.
              elif req[0:4] == 'rsrc':
                  r_list = req[4::].split(' ')
                  brick, grain, lumber, ore, wool = r_list[0], r_list[1], r_list[2], r_list[3], r_list[4]
@@ -337,17 +340,23 @@ while not game_end:
                                                        grain + "     " + wool + "     " + ore, False, (0, 0, 0))
                  window.blit(resource_bg, (0, 575))
                  window.blit(resource_display, (20, 600))
+
+             # Roll request to update dice roll display.
              elif req[0:4] == 'roll':
                  dice = req[4::]
                  dice_display = window_text.render(dice, False, (0, 0, 0))
                  window.blit(dice_bg, (320, 575))
                  window.blit(dice_display, (340, 600))
+
+             # VP request for updating current player's victory points.
              elif req[0:4] == 'pvps':
                  if turn:
                      vp = req[4::]
                      vp_display = window_text.render("VP: " + vp, False, (0, 0 , 0))
                      window.blit(vp_bg, (0, 0))
                      window.blit(vp_display, (0, 20))
+
+             # For all unintentional behavior.
              elif req[0:4] == 'errr':
                  #TO DO: Print error message in a log
                  print("Build Attempt Failed")

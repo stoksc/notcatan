@@ -215,9 +215,6 @@ for i in range(4):
 
 temp_tile = pygame.image.load('assets\\placeholder_tile.png').convert_alpha()
 # Text, buttons
-vp_text = pygame.font.SysFont('Georgia', 20)
-vp_display = vp_text.render('A quick brown fox', False, (0,0,0))
-window.blit(vp_display, (0,0))
 
 # Draws the board. (Generates rectangle, gui tile object and appends to respective lists.)
 
@@ -278,6 +275,15 @@ dragging_r = False
 placed_road = pygame.image.load('assets\\placeholder_road.png').convert_alpha()
 held_road = placed_road.get_rect(topleft=(800,600))
 
+window_text = pygame.font.SysFont('Georgia', 20)
+resource_bg = pygame.image.load('assets\\resourceBG.png')
+#vp_display = window_text.render('A quick brown fox', False, (0,0,0))
+
+#dice_display = window_text.render('A quick brown fox', False, (0,0,0))
+
+#window.blit(vp_display, (20,600))
+
+
 pygame.display.update()
 turn = False
 client = ClientControl.ClientControl()
@@ -310,6 +316,7 @@ while not game_end:
                  settlement_sprites.draw(window)
 
              elif req[0:4] == 'city':
+                 print('here')
                  row, col, vertex, p_id = int(req[4]), int(req[5]), int(req[6]), req[7]
                  index = to_1D(row, col)
 
@@ -325,6 +332,14 @@ while not game_end:
              elif req[0:4] == 'turn':
                  p_id = int(req[4])
                  sprite_pieces_list[p_id].draw(window)
+             elif req[0:4] == 'rsrc':
+                 r_list = req[4::].split(' ')
+                 brick, grain, lumber, ore, wool = r_list[0], r_list[1], r_list[2], r_list[3], r_list[4]
+                 resource_display = window_text.render(brick + "    " + lumber +"    " +
+                                                       grain + "     " + wool + "     " + ore, False, (0, 0, 0))
+                 #window.blit(resource_bg, (0, 575))
+                 #window.blit(resource_display, (20, 600))
+
              elif req[0:4] == 'errr':
                  #TO DO: Print error message in a log
                  print("Build Attempt Failed")

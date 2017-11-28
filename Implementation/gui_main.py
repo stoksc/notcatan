@@ -19,6 +19,7 @@ r_height = 21
 initial_x = 550
 initial_y = 75
 
+ip_addr, port = input('ip address: '), int(input('port: '))
 
 current_x = initial_x
 current_y = initial_y
@@ -192,7 +193,7 @@ def in_region(rect, mouse_pos):
         return False
 
 ######## window instantiation
-    
+
 pygame.init()
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Settlers of Notcatan")
@@ -277,7 +278,7 @@ pygame.display.update()
 turn = False
 
 # Creates client control object for interactions with host.
-client = ClientControl.ClientControl()
+client = ClientControl.ClientControl(ip_addr, port)
 while not game_end:
     while not client.requests.empty():
          current_requests = client.requests.get().split('|')

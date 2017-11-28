@@ -83,6 +83,7 @@ host.send_data(game_engine.game_state.current_player.netid[0], 'strt')
 roll = game_engine.dice_roll()
 broadcast_message('roll{}'.format(roll))
 broadcast_resources()
+broadcast_vps()
 
 # game loop
 while True:
@@ -98,11 +99,14 @@ while True:
                 if result is True:
                     print('>>> broadcasting success')
                     broadcast_resources()
+                    broadcast_vps()
                     broadcast_message(current_request[1] + str(game_engine.game_state.current_player_number))
                 elif result == 'city':
                     print('>>> broadcasting success')
                     new_message = 'city' + current_request[1][4::] + str(game_engine.game_state.current_player_number)
                     broadcast_message(new_message)
+                    broadcast_vps()
+                    broadcast_resources()
                 else:
                     print('>>> sending error')
                     host.send_data(current_request[0][0], 'errr')
@@ -114,6 +118,7 @@ while True:
                 roll = game_engine.dice_roll()
                 print('>>> sending roll: {}'.format(roll))
                 broadcast_resources()
+                broadcast_vps()
                 broadcast_message('roll{}'.format(roll))
                 print('>>> starting {}\'s turn'.format(game_engine.game_state.current_player.name))
                 host.send_data(game_engine.game_state.current_player.netid[0], 'strt')

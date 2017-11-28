@@ -22,17 +22,20 @@ class Player:
     def longest_road(self):
         lr = 0
         for road in self.inventory.roads:
-            rl = self.road_length(road, [], [])
-            print(rl)
+            rl = self.road_length(road, [])
             if rl > lr:
                 lr = rl
         return lr
 
-    def road_length(self, road, visited_roads, lr_arr):
+    def road_length(self, road, visited_roads):
         visited_roads.append(road)
+        roads_to_visit = []
         for edge in road.edge.edge_arr:
-            if edge.road != None:
-                if edge.road in self.inventory.roads:
-                    if not (edge.road in visited_roads):
-                        return 1 + self.road_length(edge.road, visited_roads, lr_arr)
+            if edge != None:
+                if edge.road != None:
+                    if edge.road in self.inventory.roads:
+                        if not (edge.road in visited_roads):
+                            roads_to_visit.append(edge.road)
+        if len(roads_to_visit) == 0:
             return 1
+        return max([1+self.road_length(road, visited_roads) for road in roads_to_visit])

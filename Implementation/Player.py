@@ -16,4 +16,23 @@ class Player:
         self.netid = netid
         self.name = name
         self.color = color
+        self.vps = 0
         self.inventory = Inventory.Inventory()
+
+    def longest_road(self):
+        lr = 0
+        for road in self.inventory.roads:
+            rl = self.road_length(road, [], [])
+            print(rl)
+            if rl > lr:
+                lr = rl
+        return lr
+
+    def road_length(self, road, visited_roads, lr_arr):
+        visited_roads.append(road)
+        for edge in road.edge.edge_arr:
+            if edge.road != None:
+                if edge.road in self.inventory.roads:
+                    if not (edge.road in visited_roads):
+                        return 1 + self.road_length(edge.road, visited_roads, lr_arr)
+            return 1

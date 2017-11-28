@@ -17,10 +17,17 @@ def broadcast_resources():
                                                   str(player.inventory.ore),
                                                   str(player.inventory.wool)]))
 
+def broadcast_vps():
+    game_engine.update_vps()
+    for player in game_engine.game_state.player_array:
+        broadcast_message('pvps' + str(player.vps))
+
 def make_build_info(request):
     if request[:4] == 'road':
         return BuildInfo(int(request[4]), int(request[5]), int(request[6]), True, False, False)
     elif request[:4] == 'sett':
+        return BuildInfo(int(request[4]), int(request[5]), int(request[6]), False, True, False)
+    elif request[:4] == 'city':
         return BuildInfo(int(request[4]), int(request[5]), int(request[6]), False, True, False)
     elif request[:4] == 'devc':
         return BuildInfo(0, 0, 0, False, False, True)
@@ -83,6 +90,7 @@ while True:
         print('<<< reading request')
         current_request = host.requests.get()
         requester_netid = current_request[0]
+        print(current_request)
         if requester_netid == game_engine.game_state.current_player.netid:
             build_info = make_build_info(current_request[1])
             if build_info is not None:

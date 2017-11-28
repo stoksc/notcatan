@@ -12,9 +12,3 @@ class Edge:
         self.tile_arr = [self.t1, self.t2] = [None, None]
         self.vertex_arr = [self.v1, self.v2] = [None, None]
         self.road = None
-
-    def other_vertex(self, vertex):
-        if vertex == self.vertex_array[self.v1]:
-            return self.vertex_array[self.v2]
-        else:
-            return self.vertex_array[self.v1]

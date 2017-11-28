@@ -165,3 +165,14 @@ class GameEngine:
                         else:
                             player.inventory.ore += 1
         return roll
+
+    def update_vps(self):
+        longest_road = (None, 0)
+        for player in self.game_state.player_array:
+            player.vps = 0
+            player_lr = player.longest_road()
+            if player_lr > longest_road[1]:
+                longest_road = (player, player_lr)
+            player.vps += len(player.inventory.settlements)
+            player.vps += len(player.inventory.cities)
+        longest_road[0].vps += 1

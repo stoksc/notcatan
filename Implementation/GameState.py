@@ -136,7 +136,7 @@ class GameState:
         for tile in vertex.tile_arr:
             if tile != None:
                 vertex_index = tile.vertex_arr.index(vertex)
-                r1 = tile.edge_arr[vertex_index-1].road
+                r1 = tile.edge_arr[(vertex_index-1)%6].road
                 r2 = tile.edge_arr[vertex_index].road
                 if r1 != None:
                     if r1.owner == self.current_player:
@@ -145,3 +145,18 @@ class GameState:
                     if r2.owner == self.current_player:
                         return True
         return False
+
+    def not_on_opp_sett(self, edge):
+        for tile in edge.tile_arr:
+            if tile != None:
+                t1 = tile
+        edge_index = t1.edge_arr.index(edge)
+        s1 = tile.vertex_arr[edge_index].settlement
+        s2 = tile.vertex_arr[(edge_index+1)%6].settlement
+        if s1 != None:
+            if s1.owner != self.current_player:
+                return False
+        if s2 != None:
+            if s2.owner != self.current_player:
+                return False
+        return True

@@ -144,7 +144,7 @@ class GameEngine:
             self.game_state.current_player.inventory.add_city(object_to_build_on.city)
             # TODO: uniformize this output
             return 'city'
-        elif type(object_to_build_on) is Edge.Edge:
+        elif type(object_to_build_on) is Edge.Edge and self.game_state.not_on_opp_sett(object_to_build_on):
             object_to_build_on.road = Road.Road(object_to_build_on)
             object_to_build_on.road.owner = self.game_state.current_player
             self.game_state.current_player.inventory.add_road(object_to_build_on.road)

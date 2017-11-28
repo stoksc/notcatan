@@ -128,4 +128,19 @@ class GameState:
         if vertex in self.invalid_vertices_to_build_array:
             return False
         else:
-            return True
+            if self.has_connected_road(vertex):
+                return True
+            return False
+
+    def has_connected_road(self, vertex):
+        for tile in vertex.tile_arr:
+            vertex_index = tile.vertex_arr.index(vertex)
+            r1 = tile.edge_arr[vertex_index-1].road
+            r2 = tile.edge_arr[vertex_index].road
+            if r1 != None:
+                if r1.owner == self.current_player:
+                    return True
+            if r2 != None:
+                if r2.owner == self.current_player:
+                    return True
+        return False

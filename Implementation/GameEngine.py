@@ -32,7 +32,6 @@ class GameEngine:
             passed info was built.
             False (bool): Returns a False boolean value if the game_state was not modified for any reason.
         """
-        print(build_info.build_type)
         if self.check_player_inventory(build_info.build_type):
             location_to_build = None
             if build_info.build_type == "Road":
@@ -143,6 +142,7 @@ class GameEngine:
             object_to_build_on.city = City.City(object_to_build_on)
             object_to_build_on.city.owner = self.game_state.current_player
             self.game_state.current_player.inventory.add_city(object_to_build_on.city)
+            # TODO: uniformize this output
             return 'city'
         elif type(object_to_build_on) is Edge.Edge:
             object_to_build_on.road = Road.Road(object_to_build_on)

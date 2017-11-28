@@ -16,8 +16,8 @@ r_width = 37
 r_height = 21
 
 # top left coordinates for first tile
-initial_x = 500
-initial_y = 150
+initial_x = 550
+initial_y = 75
 
 
 current_x = initial_x
@@ -78,6 +78,8 @@ to_render = pygame.sprite.Group()
 to_derender = pygame.sprite.Group()
 settlement_sprites = pygame.sprite.Group()
 held_piece = pygame.sprite.Group()
+
+
 
 class Sett_Sprite(pygame.sprite.Sprite):
     def __init__(self, img, pos):
@@ -194,33 +196,45 @@ clock = pygame.time.Clock()
 game_end = False
 window.fill(BLUE)
 
-# PASS BUTTON #####
-pass_button = pygame.image.load('assets\\placeholder_tile.png').convert_alpha()
-window.blit(pass_button, (0, 0))
-pass_button_rect = pass_button.get_rect(topleft=(0, 0))
-
 # loading images #####
-road_stack = pygame.image.load('assets\\placeholder_road.png').convert_alpha()
-settlement_stack = pygame.image.load('assets\\placeholder_settlement.png').convert_alpha()
+road_stack = pygame.image.load('assets\\RoadP0-5.png').convert_alpha()
+settlement_stack = pygame.image.load('assets\\SettlementP0.png').convert_alpha()
 city_stack = pygame.image.load('assets\\CityP0.png').convert_alpha()
 
+resource_bar = pygame.image.load('assets\\ResourceBar.png').convert_alpha()
+dice_icon = pygame.image.load('assets\\DiceIcon.png').convert_alpha()
+skip_button = pygame.image.load('assets\\SkipButton.png').convert_alpha()
+
+sprite_pieces_list = []
+for i in range(4):
+    sg = pygame.sprite.Group()
+    sg.add(Sett_Sprite('assets\\SettlementP' + str(i) + '.png', (630, 634)))
+    sg.add(Road_Sprite('assets\\RoadP' + str(i) + "-" + str(5) + ".png", (690, 634)))
+    sg.add(City_Sprite('assets\\CityP' + str(i) + ".png", (770, 634)))
+    sprite_pieces_list.append(sg)
+
 temp_tile = pygame.image.load('assets\\placeholder_tile.png').convert_alpha()
-
-
+# Text, buttons
+vp_text = pygame.font.SysFont('Georgia', 20)
+vp_display = vp_text.render('A quick brown fox', False, (0,0,0))
+window.blit(vp_display, (0,0))
 
 # Draws the board. (Generates rectangle, gui tile object and appends to respective lists.)
 
 for i in range(19):
-    if i < 3:
-        tile_file = "assets\\Tile0" + str(i) + ".png"
-    elif i < 7:
-        tile_file = "assets\\Tile1" + str(i - 3) + ".png"
-    elif i < 12:
-        tile_file = "assets\\Tile2" + str(i - 7) + ".png"
-    elif i < 16:
-        tile_file = "assets\\Tile3" + str(i - 12) + ".png"
-    else:
-        tile_file = "assets\\Tile4" + str(i - 16) + ".png"
+    tile_file = "assets\\Tile" + to_2D(i) + ".png"
+
+# for i in range(19):
+#     if i < 3:
+#         tile_file = "assets\\Tile0" + str(i) + ".png"
+#     elif i < 7:
+#         tile_file = "assets\\Tile1" + str(i - 3) + ".png"
+#     elif i < 12:
+#         tile_file = "assets\\Tile2" + str(i - 7) + ".png"
+#     elif i < 16:
+#         tile_file = "assets\\Tile3" + str(i - 12) + ".png"
+#     else:
+#         tile_file = "assets\\Tile4" + str(i - 16) + ".png"
 
     temp_tile = pygame.image.load(tile_file).convert_alpha()
     new_pos = get_tile_pos(i)
@@ -232,14 +246,20 @@ for i in range(19):
     tile_rect_list.append(temp_tile_rect)
     gui_tile_list.append(temp_tile_guiTile)
 
-window.blit(road_stack, (300, 600))
-road_stack_rect = road_stack.get_rect(topleft=(300, 600))
+window.blit(resource_bar, (0, 634))
+window.blit(dice_icon, (320,634))
 
-window.blit(settlement_stack, (800, 600))
-settlement_stack_rect = settlement_stack.get_rect(topleft=(800, 600))
+window.blit(skip_button, (940, 646))
+skip_button_rect = skip_button.get_rect(topleft=(940, 646))
 
-window.blit(city_stack, (500, 600))
-city_stack_rect = settlement_stack.get_rect(topleft=(500, 600))
+window.blit(settlement_stack, (630, 634))
+settlement_stack_rect = settlement_stack.get_rect(topleft=(630, 634))
+
+window.blit(road_stack, (690, 634))
+road_stack_rect = road_stack.get_rect(topleft=(690, 634))
+
+window.blit(city_stack, (770, 634))
+city_stack_rect = settlement_stack.get_rect(topleft=(770, 600))
 
 ## ???
 upgraded_cities = pygame.sprite.Group()
@@ -250,6 +270,8 @@ dragging_c = False
 h_s = pygame.sprite.Sprite()
 h_s.image = pygame.image.load('assets\\placeholder_settlement.png').convert_alpha()
 placed_settlement = pygame.image.load('assets\\placeholder_settlement.png').convert_alpha()
+
+
 held_settlement = placed_settlement.get_rect(topleft=(800,600))
 
 dragging_r = False
@@ -300,6 +322,9 @@ while not game_end:
                  to_render.add(c_sprite)
                  to_render.draw(window)
                  settlement_sprites.draw(window)
+             elif req[0:4] == 'turn':
+                 p_id = int(req[4])
+                 sprite_pieces_list[p_id].draw(window)
              elif req[0:4] == 'errr':
                  #TO DO: Print error message in a log
                  print("Build Attempt Failed")
@@ -316,7 +341,7 @@ while not game_end:
         if turn:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    if pass_button_rect.collidepoint(event.pos):
+                    if skip_button_rect.collidepoint(event.pos):
                         client.send_build_obj('pass')
                     elif settlement_stack_rect.collidepoint(event.pos):
                         dragging_s = True
@@ -331,7 +356,6 @@ while not game_end:
                 target_i = closest_tile.closest_v(m_x, m_y)[1]
 
                 # Changes tile address from 1D array to 2D array.
-                # message = "sett" + to_2D(index) + str(target_i)
 
                 if index < 3:
                     message = "sett0" + str(index) + str(target_i)

@@ -32,6 +32,7 @@ class GameEngine:
             passed info was built.
             False (bool): Returns a False boolean value if the game_state was not modified for any reason.
         """
+        print(build_info.build_type)
         if self.check_player_inventory(build_info.build_type):
             location_to_build = None
             if build_info.build_type == "Road":
@@ -39,10 +40,17 @@ class GameEngine:
                     [build_info.column].edge_arr[build_info.index]
                 if self.check_location(location_to_build):
                     return self.build_item(location_to_build)
-            elif build_info.build_type == "Settlement/City":
+            elif build_info.build_type == "Settlement":
                 location_to_build = self.game_state.board.tile_array[build_info.row]\
                     [build_info.column].vertex_arr[build_info.index]
                 if self.check_location(location_to_build):
+                    return self.build_item(location_to_build)
+            elif build_info.build_type == 'City':
+                location_to_build = self.game_state.board.tile_array[build_info.row]\
+                    [build_info.column].vertex_arr[build_info.index]
+                if self.check_location(location_to_build):
+                    if location_to_build.settlement is None:
+                        return False
                     return self.build_item(location_to_build)
             elif build_info.build_type == "Development Card":
                 return self.build_item(location_to_build)
@@ -66,10 +74,13 @@ class GameEngine:
         """
         if build_type == "Road":
             return self.game_state.current_player.inventory.has_road()
-        elif build_type == "Settlement/City":
-            if self.game_state.current_player.inventory.has_city():
+        elif build_type == "Settlement":
+            if self.game_state.current_player.inventory.has_settlement():
                 return True
-            elif self.game_state.current_player.inventory.has_settlement():
+            else:
+                return False
+        elif build_type == 'City':
+            if self.game_state.current_player.inventory.has_city():
                 return True
             else:
                 return False

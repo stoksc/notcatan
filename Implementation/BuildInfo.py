@@ -20,16 +20,20 @@ class BuildInfo:
         Returns:
             None
         """
-        self.dev_card = dev_card
-        if self.dev_card is True:
+        if dev_card:
             self.build_type = "Development Card"
+        elif edge and vertex:
+            self.build_type = 'City'
+            self.row = row
+            self.column = column
+            self.index = index
         elif edge:
             self.build_type = "Road"
             self.row = row
             self.column = column
             self.index = index
         elif vertex:
-            self.build_type = "Settlement/City"
+            self.build_type = "Settlement"
             self.row = row
             self.column = column
             self.index = index

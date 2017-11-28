@@ -28,14 +28,13 @@ def make_build_info(request):
     elif request[:4] == 'sett':
         return BuildInfo(int(request[4]), int(request[5]), int(request[6]), False, True, False)
     elif request[:4] == 'city':
-        return BuildInfo(int(request[4]), int(request[5]), int(request[6]), False, True, False)
+        return BuildInfo(int(request[4]), int(request[5]), int(request[6]), True, True, False)
     elif request[:4] == 'devc':
         return BuildInfo(0, 0, 0, False, False, True)
     elif request[:4] == 'pass':
         return None
     else:
-        # TODO: raise a damn error
-        return None
+        raise ValueError('Bad BuildInfo() request.')
 
 # get player connections
 host = HostControl.HostControl(('localhost', 8000))
@@ -54,6 +53,7 @@ for player in player_array:
     player.inventory.brick += 400
     player.inventory.wool += 200
     player.inventory.grain += 200
+    player.inventory.ore += 200
 
 # initialize game
 game_engine = GameEngine.GameEngine(player_array)

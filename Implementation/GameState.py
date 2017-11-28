@@ -24,6 +24,7 @@ class GameState:
         Returns:
             None
         """
+        self.startup = True
         self.board = Board.Board()
         self.player_array = player_array
         self.invalid_vertices_to_build_array = []
@@ -151,8 +152,8 @@ class GameState:
             if tile != None:
                 t1 = tile
         edge_index = t1.edge_arr.index(edge)
-        s1 = tile.vertex_arr[edge_index].settlement
-        s2 = tile.vertex_arr[(edge_index+1)%6].settlement
+        s1 = t1.vertex_arr[edge_index].settlement
+        s2 = t1.vertex_arr[(edge_index+1)%6].settlement
         if s1 != None:
             if s1.owner != self.current_player:
                 return False
@@ -160,3 +161,9 @@ class GameState:
             if s2.owner != self.current_player:
                 return False
         return True
+
+    def road_has_connected_road(self, edge):
+        for edge in edge.edge_arr:
+            if (edge != None) and (edge.road != None) and (edge.road.owner != None) and (edge.road.owner == self.current_player):
+                return True
+        return False

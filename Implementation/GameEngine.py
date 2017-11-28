@@ -101,7 +101,10 @@ class GameEngine:
              to proceed with the build() method that invoked this method.
         """
         if type(object_to_build_on) is Edge.Edge and object_to_build_on.road is None:
-            return True
+            if self.game_state.road_has_connected_road(object_to_build_on) or self.game_state.startup:
+                return True
+            else:
+                return False
         elif type(object_to_build_on) is Vertex.Vertex and object_to_build_on.settlement is None:
             if self.game_state.vertex_check(object_to_build_on):
                 return True

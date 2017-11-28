@@ -79,6 +79,7 @@ broadcast_message('sett2221')
 game_engine.next_player()
 
 # start first player's turn and roll first dice
+game_engine.game_state.startup = False
 host.send_data(game_engine.game_state.current_player.netid[0], 'strt')
 roll = game_engine.dice_roll()
 broadcast_message('roll{}'.format(roll))
@@ -119,6 +120,7 @@ while True:
                 print('>>> sending roll: {}'.format(roll))
                 broadcast_resources()
                 broadcast_vps()
+                broadcast_message('turn{}'.format(game_engine.game_state.current_player_number))
                 broadcast_message('roll{}'.format(roll))
                 print('>>> starting {}\'s turn'.format(game_engine.game_state.current_player.name))
                 host.send_data(game_engine.game_state.current_player.netid[0], 'strt')

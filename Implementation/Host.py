@@ -5,9 +5,6 @@ import HostControl
 import socket
 # import pdb; pdb.set_trace()
 
-ip_addr = socket.gethostbyname(socket.gethostname())
-port = 8000
-
 # functions to broadcast gamestate changes
 def broadcast_message(message):
     for player in game_engine.game_state.player_array:
@@ -41,7 +38,7 @@ def make_build_info(request):
         raise ValueError('Bad BuildInfo() request.')
 
 # get player connections
-host = HostControl.HostControl((ip_addr, port))
+host = HostControl.HostControl(('localhost', 8000))
 player_addrs = host.get_conns()
 
 # initialize players

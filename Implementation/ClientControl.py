@@ -6,12 +6,12 @@ import queue
 
 
 class ClientControl():
-    def __init__(self, ip_addr, port):
+    def __init__(self):
         #create a tcp/ip socket
         self.sock = socket.socket(socket.AF_INET,
                              socket.SOCK_STREAM)
         #connect the socket to the port where the server is listening
-        serv_addr = (ip_addr, port)
+        serv_addr = ('localhost', 8000)
         print('connecting to {} port {}'.format(serv_addr[0],serv_addr[1]))
         self.sock.connect(serv_addr)
         self.requests = queue.Queue()

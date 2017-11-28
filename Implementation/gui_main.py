@@ -19,8 +19,6 @@ r_height = 21
 initial_x = 550
 initial_y = 75
 
-ip_addr, port = input('ip address: '), int(input('port: '))
-
 current_x = initial_x
 current_y = initial_y
 
@@ -278,7 +276,7 @@ pygame.display.update()
 turn = False
 
 # Creates client control object for interactions with host.
-client = ClientControl.ClientControl(ip_addr, port)
+client = ClientControl.ClientControl()
 while not game_end:
     while not client.requests.empty():
          current_requests = client.requests.get().split('|')

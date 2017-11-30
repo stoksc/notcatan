@@ -1,0 +1,180 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>GameEngine module &#8212; Implementation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GameEngineTestingSuite module" href="GameEngineTestingSuite.html" />
+    <link rel="prev" title="GUI_tile module" href="GUI_tile.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-GameEngine">
+<span id="gameengine-module"></span><h1>GameEngine module<a class="headerlink" href="#module-GameEngine" title="Permalink to this headline">¶</a></h1>
+<p>This class is the GameEngine class. It contains the object repository and the logic that the game follows so that the
+Katan players can experience the functionality of the game itself.</p>
+<dl class="class">
+<dt id="GameEngine.GameEngine">
+<em class="property">class </em><code class="descclassname">GameEngine.</code><code class="descname">GameEngine</code><span class="sig-paren">(</span><em>player_array</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="GameEngine.GameEngine.build">
+<code class="descname">build</code><span class="sig-paren">(</span><em>build_info</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Game_Engine uses this method in order to determine which action, if said action is valid, and to complete
+the instantiation of the object.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>build_info (BuildInfo): Object with relevant information to dynamically determine what and where the
+object to instantiate in the game_state.</dd>
+<dt>Returns:</dt>
+<dd>True (bool): Returns a True boolean value if the game_state was modified and the item determined from the
+passed info was built.
+False (bool): Returns a False boolean value if the game_state was not modified for any reason.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="GameEngine.GameEngine.build_item">
+<code class="descname">build_item</code><span class="sig-paren">(</span><em>object_to_build_on</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine.build_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine.build_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Game_Engine uses this method in order to instantiate the object that the build() method has determined as
+the valid object to instantiate after previous checks, check_location() and player_inventory() methods, have
+returned a True boolean value.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>object_to_build_on (object): An object argument that is passed to this method to determine which object that
+the build() method, that invoked this method, is attempting to instantiate.</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="GameEngine.GameEngine.check_location">
+<code class="descname">check_location</code><span class="sig-paren">(</span><em>object_to_build_on</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine.check_location"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine.check_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Game_Engine uses this method in order to check if the object_to_build_on value is a valid object to proceed
+with the build() method that initially invoked this method.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>object_to_build_on (object): An object argument that is passed to this method to determine whether or not
+the object is a valid value that in order to proceed with the build() method that invoked this method.</dd>
+<dt>Returns:</dt>
+<dd>True (bool): Returns a True boolean value if the object_to_build_on value is valid in order to proceed with
+the build() method that invoked this method.
+False (bool): Returns a False boolean value if the object_to_build_on value is not a valid value in order
+to proceed with the build() method that invoked this method.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="GameEngine.GameEngine.check_player_inventory">
+<code class="descname">check_player_inventory</code><span class="sig-paren">(</span><em>build_type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine.check_player_inventory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine.check_player_inventory" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Game_Engine uses this method in order to check if the current_player has the appropriate attributes in order
+to proceed with the build() method that invoked this method.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>build_type (str): A string argument that is passed to this method to determine which object the build()
+method is to try and instantiate and check whether or not the current_player has the appropriate attributes
+to actually instantiate the type of object that the build() method is trying to instantiate.</dd>
+<dt>Returns:</dt>
+<dd>True (bool): Returns a True boolean value if the current_player has the appropriate attributes to
+instantiate the type of object the build() method is attempting to instantiate.
+False (bool): Returns a False boolean value if the current_player does not have the appropriate attributes
+to instantiate the type of object the build() method is attempting to instantiate.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="GameEngine.GameEngine.dice_roll">
+<code class="descname">dice_roll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine.dice_roll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine.dice_roll" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="GameEngine.GameEngine.next_player">
+<code class="descname">next_player</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine.next_player"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine.next_player" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="GameEngine.GameEngine.update_vps">
+<code class="descname">update_vps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine.update_vps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine.update_vps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="GUI_tile.html" title="previous chapter">GUI_tile module</a></li>
+      <li>Next: <a href="GameEngineTestingSuite.html" title="next chapter">GameEngineTestingSuite module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/GameEngine.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

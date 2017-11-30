@@ -1,0 +1,112 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Player module &#8212; Implementation  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Road module" href="Road.html" />
+    <link rel="prev" title="Inventory module" href="Inventory.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Player">
+<span id="player-module"></span><h1>Player module<a class="headerlink" href="#module-Player" title="Permalink to this headline">¶</a></h1>
+<p>Class Player contains all the objects that belong to the Player and all the methods that the Player
+can execute.</p>
+<p>The Player has an inventory, a color, a name and turn variable which the Game accesses to give the player
+permission to act on the GameBoard.</p>
+<p>The player can place a road, place a settlement, upgrade a settlement and roll the dice.</p>
+<dl class="class">
+<dt id="Player.Player">
+<em class="property">class </em><code class="descclassname">Player.</code><code class="descname">Player</code><span class="sig-paren">(</span><em>netid</em>, <em>color</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Player.html#Player"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Player.Player" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="Player.Player.longest_road">
+<code class="descname">longest_road</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Player.html#Player.longest_road"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Player.Player.longest_road" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Player.Player.road_length">
+<code class="descname">road_length</code><span class="sig-paren">(</span><em>road</em>, <em>visited_roads</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Player.html#Player.road_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Player.Player.road_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Inventory.html" title="previous chapter">Inventory module</a></li>
+      <li>Next: <a href="Road.html" title="next chapter">Road module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Player.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

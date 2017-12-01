@@ -1,7 +1,9 @@
-# Settlers-of-definitely-not-Katan
+# notcatan
 Project for Software Engineering at CSU; undeveloped knockoff of the classic Settlers of Catan to practice SWE practices. This is purely for educational purposes and we do not claim to own any of the visual assets used in this project.
 
 ## Getting Started
+
+To view our docs, go [here](https://stoksc.github.io/notcatan/).
 
 #### If you want, for some odd reason, to run this on your machine, here's how:
 1. Make sure you have a Python3 environment with pygame package installed.

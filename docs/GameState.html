@@ -23,8 +23,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Host module" href="Host.html" />
-    <link rel="prev" title="GameEngineTestingSuite module" href="GameEngineTestingSuite.html" />
+    <link rel="next" title="HostControl module" href="HostControl.html" />
+    <link rel="prev" title="GameEngine module" href="GameEngine.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -54,8 +54,7 @@ Definitely Not Katan game.</p>
 <dd><p>The Game_State uses this method to add a set of invalid vertices to the invalid vertices array.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>vertex (Vertex): The vertex used to find the set of invalid vertices to add to the <a href="#id1"><span class="problematic" id="id2">invalid_vertices_to_</span></a>
-build_array.</dd>
+<dd>vertex (Vertex): The vertex used to find the set of invalid vertices to add to the invalid_vertices_to_build_array.</dd>
 <dt>Returns:</dt>
 <dd>None</dd>
 </dl>
@@ -64,16 +63,22 @@ build_array.</dd>
 <dl class="method">
 <dt id="GameState.GameState.has_connected_road">
 <code class="descname">has_connected_road</code><span class="sig-paren">(</span><em>vertex</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameState.html#GameState.has_connected_road"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameState.GameState.has_connected_road" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This checks if the passed vertex has a neighbor edge with a road owner by self.current_player.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>Vertex</dd>
+<dt>Returns:</dt>
+<dd>bool</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="GameState.GameState.initial_setup">
 <code class="descname">initial_setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameState.html#GameState.initial_setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameState.GameState.initial_setup" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method sets the tile types and values for the default setup.
-Args:</p>
-<blockquote>
-<div>None.</div></blockquote>
+<dd><p>This method sets the tile types and values for the default setup.</p>
 <dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
 <dt>Returns:</dt>
 <dd>None.</dd>
 </dl>
@@ -82,18 +87,31 @@ Args:</p>
 <dl class="method">
 <dt id="GameState.GameState.not_on_opp_sett">
 <code class="descname">not_on_opp_sett</code><span class="sig-paren">(</span><em>edge</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameState.html#GameState.not_on_opp_sett"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameState.GameState.not_on_opp_sett" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This checks if the passed edge is neighboring a vertex with an opponent build settlement.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>Edge</dd>
+<dt>Returns:</dt>
+<dd>bool</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="GameState.GameState.road_has_connected_road">
 <code class="descname">road_has_connected_road</code><span class="sig-paren">(</span><em>edge</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameState.html#GameState.road_has_connected_road"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameState.GameState.road_has_connected_road" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This checks if the edge passed has a neighboring edge with a road owned by self.current_player.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>Edge</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="GameState.GameState.vertex_check">
 <code class="descname">vertex_check</code><span class="sig-paren">(</span><em>vertex</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameState.html#GameState.vertex_check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameState.GameState.vertex_check" title="Permalink to this definition">¶</a></dt>
-<dd><p>The Game_State uses this method to check whether or not the vertex passed exists in the <a href="#id3"><span class="problematic" id="id4">invalid_vertices_to_</span></a>
-build_array.</p>
+<dd><p>The Game_State uses this method to check whether or not the vertex passed exists in the invalid_vertices_to_build_array.</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd>vertex (Vertex): The vertex passed to check</dd>
@@ -115,8 +133,8 @@ build_array.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="GameEngineTestingSuite.html" title="previous chapter">GameEngineTestingSuite module</a></li>
-      <li>Next: <a href="Host.html" title="next chapter">Host module</a></li>
+      <li>Previous: <a href="GameEngine.html" title="previous chapter">GameEngine module</a></li>
+      <li>Next: <a href="HostControl.html" title="next chapter">HostControl module</a></li>
   </ul></li>
 </ul>
 </div>

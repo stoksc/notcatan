@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Inventory module" href="Inventory.html" />
-    <link rel="prev" title="Host module" href="Host.html" />
+    <link rel="prev" title="GameState module" href="GameState.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -42,6 +42,7 @@
             
   <div class="section" id="module-HostControl">
 <span id="hostcontrol-module"></span><h1>HostControl module<a class="headerlink" href="#module-HostControl" title="Permalink to this headline">¶</a></h1>
+<p>Class wraps all the socket stuff for the Host to use.</p>
 <dl class="class">
 <dt id="HostControl.HostControl">
 <em class="property">class </em><code class="descclassname">HostControl.</code><code class="descname">HostControl</code><span class="sig-paren">(</span><em>serv_addr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HostControl.html#HostControl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HostControl.HostControl" title="Permalink to this definition">¶</a></dt>
@@ -49,22 +50,50 @@
 <dl class="method">
 <dt id="HostControl.HostControl.close">
 <code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HostControl.html#HostControl.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HostControl.HostControl.close" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Close the host connection.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="HostControl.HostControl.get_conns">
 <code class="descname">get_conns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HostControl.html#HostControl.get_conns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HostControl.HostControl.get_conns" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Listens for connects and returns a list of (active_conns, addrs) when it has NUMBER_OF_CLIENTS connections.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd>[(Socket, ip_addr)]</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="HostControl.HostControl.rec_data">
 <code class="descname">rec_data</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HostControl.html#HostControl.rec_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HostControl.HostControl.rec_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Receives and decodes data and puts it on a request queue.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="HostControl.HostControl.send_data">
 <code class="descname">send_data</code><span class="sig-paren">(</span><em>connection</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HostControl.html#HostControl.send_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#HostControl.HostControl.send_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Sends ‘|’ + message encoded as utf-8 to the connection passed. (‘|’ solves client receives clumps of request when they come in too fast)</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>Socket, String</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -79,7 +108,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="Host.html" title="previous chapter">Host module</a></li>
+      <li>Previous: <a href="GameState.html" title="previous chapter">GameState module</a></li>
       <li>Next: <a href="Inventory.html" title="next chapter">Inventory module</a></li>
   </ul></li>
 </ul>

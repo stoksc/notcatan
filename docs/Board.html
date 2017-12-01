@@ -51,32 +51,74 @@ no one knows.</p>
 <dl class="method">
 <dt id="Board.Board.add_edges">
 <code class="descname">add_edges</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Board.html#Board.add_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Board.Board.add_edges" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Adds edges to all the tiles and sets up tiles to share edges that they should.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Board.Board.add_vertices">
 <code class="descname">add_vertices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Board.html#Board.add_vertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Board.Board.add_vertices" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Adds vertices to all the tiles that are correctly shared by neighboring tiles.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Board.Board.connect_edges_to_edges">
 <code class="descname">connect_edges_to_edges</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Board.html#Board.connect_edges_to_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Board.Board.connect_edges_to_edges" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Points edges as their neighboring edges for simpler implementation of longest road calculations and more.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Board.Board.connect_tiles">
 <code class="descname">connect_tiles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Board.html#Board.connect_tiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Board.Board.connect_tiles" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Creates a catan-structured graph from self.tile_array by connecting tiles to tiles.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Board.Board.connect_vertices_to_vertices">
 <code class="descname">connect_vertices_to_vertices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Board.html#Board.connect_vertices_to_vertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Board.Board.connect_vertices_to_vertices" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Points vertices at neighboring vertices for simpler calculations of invalid vertices and more.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Board.Board.is_valid_coordinate">
 <code class="descname">is_valid_coordinate</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Board.html#Board.is_valid_coordinate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Board.Board.is_valid_coordinate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns true if a tile coord, (x, y), is within range, false if not.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>int, int</dd>
+<dt>Returns:</dt>
+<dd>bool</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

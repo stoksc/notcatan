@@ -60,8 +60,7 @@
 <span class="sd">        in Game_Engine from player input for this Game_State to be initialized.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            player_array ([Player]): An array of the Player class argument that is passed to this method to properly</span>
-<span class="sd">            initialize the Game_State.</span>
+<span class="sd">            player_array ([Player]): An array of the Player class argument that is passed to this method to properly initialize the Game_State.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -79,6 +78,7 @@
 <div class="viewcode-block" id="GameState.initial_setup"><a class="viewcode-back" href="../GameState.html#GameState.GameState.initial_setup">[docs]</a>    <span class="k">def</span> <span class="nf">initial_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method sets the tile types and values for the default setup.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            None.</span>
 <span class="sd">        Returns:</span>
@@ -143,8 +143,7 @@
 <span class="sd">        The Game_State uses this method to add a set of invalid vertices to the invalid vertices array.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            vertex (Vertex): The vertex used to find the set of invalid vertices to add to the invalid_vertices_to_</span>
-<span class="sd">            build_array.</span>
+<span class="sd">            vertex (Vertex): The vertex used to find the set of invalid vertices to add to the invalid_vertices_to_build_array.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -158,12 +157,10 @@
 
 <div class="viewcode-block" id="GameState.vertex_check"><a class="viewcode-back" href="../GameState.html#GameState.GameState.vertex_check">[docs]</a>    <span class="k">def</span> <span class="nf">vertex_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        The Game_State uses this method to check whether or not the vertex passed exists in the invalid_vertices_to_</span>
-<span class="sd">        build_array.</span>
+<span class="sd">        The Game_State uses this method to check whether or not the vertex passed exists in the invalid_vertices_to_build_array.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            vertex (Vertex): The vertex passed to check</span>
-
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: if the vertex is in the invalid_vertices_to_build_array, returns False; else True.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -175,6 +172,14 @@
             <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="GameState.has_connected_road"><a class="viewcode-back" href="../GameState.html#GameState.GameState.has_connected_road">[docs]</a>    <span class="k">def</span> <span class="nf">has_connected_road</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This checks if the passed vertex has a neighbor edge with a road owner by self.current_player.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Vertex</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="n">vertex</span><span class="o">.</span><span class="n">tile_arr</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">tile</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">vertex_index</span> <span class="o">=</span> <span class="n">tile</span><span class="o">.</span><span class="n">vertex_arr</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
@@ -189,6 +194,14 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="GameState.not_on_opp_sett"><a class="viewcode-back" href="../GameState.html#GameState.GameState.not_on_opp_sett">[docs]</a>    <span class="k">def</span> <span class="nf">not_on_opp_sett</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This checks if the passed edge is neighboring a vertex with an opponent build settlement.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Edge</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="n">edge</span><span class="o">.</span><span class="n">tile_arr</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">tile</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">t1</span> <span class="o">=</span> <span class="n">tile</span>
@@ -204,6 +217,14 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="GameState.road_has_connected_road"><a class="viewcode-back" href="../GameState.html#GameState.GameState.road_has_connected_road">[docs]</a>    <span class="k">def</span> <span class="nf">road_has_connected_road</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This checks if the edge passed has a neighboring edge with a road owned by self.current_player.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Edge</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edge</span><span class="o">.</span><span class="n">edge_arr</span><span class="p">:</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">edge</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">edge</span><span class="o">.</span><span class="n">road</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">edge</span><span class="o">.</span><span class="n">road</span><span class="o">.</span><span class="n">owner</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">edge</span><span class="o">.</span><span class="n">road</span><span class="o">.</span><span class="n">owner</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_player</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">True</span>

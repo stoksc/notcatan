@@ -1,3 +1,7 @@
+'''
+Class wraps all the socket stuff for the Host to use.
+'''
+
 import socket
 import sys
 import queue
@@ -19,6 +23,14 @@ class HostControl:
         self.requests = queue.Queue()
 
     def get_conns(self):
+        '''
+        Listens for connects and returns a list of (active_conns, addrs) when it has NUMBER_OF_CLIENTS connections.
+
+        Args:
+            None
+        Returns:
+            [(Socket, ip_addr)]
+        '''
         while True:
             print('{} connections. \nwaiting for more'.format(len(self.clients)),
                 file=sys.stderr)
@@ -32,6 +44,14 @@ class HostControl:
         return self.clients
 
     def rec_data(self, client):
+        '''
+        Receives and decodes data and puts it on a request queue.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         while 1:
             time.sleep(1)
             data = bytes.decode(client[0].recv(128))
@@ -39,8 +59,24 @@ class HostControl:
             self.requests.put(request)
 
     def send_data(self, connection, message):
+        '''
+        Sends '|' + message encoded as utf-8 to the connection passed. ('|' solves client receives clumps of request when they come in too fast)
+
+        Args:
+            Socket, String
+        Returns:
+            None
+        '''
         connection.send(('|'+message).encode('utf-8'))
 
     def close(self):
+        '''
+        Close the host connection.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         print('closing socket')
         self.sock.close()

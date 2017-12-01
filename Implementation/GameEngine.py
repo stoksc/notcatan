@@ -120,7 +120,6 @@ class GameEngine:
         The Game_Engine uses this method in order to instantiate the object that the build() method has determined as
         the valid object to instantiate after previous checks, check_location() and player_inventory() methods, have
         returned a True boolean value.
-
         Args:
             object_to_build_on (object): An object argument that is passed to this method to determine which object that
             the build() method, that invoked this method, is attempting to instantiate.
@@ -154,10 +153,26 @@ class GameEngine:
             return True
 
     def next_player(self):
+        '''
+        This increments the current_player_number mod 6 and the current_player.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         self.game_state.current_player_number = (self.game_state.current_player_number + 1) % Constants.NUMBER_OF_CLIENTS
         self.game_state.current_player = self.game_state.player_array[self.game_state.current_player_number]
 
     def dice_roll(self):
+        '''
+        This rolls the dice and updates player inventories accordingly.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         roll = random.randint(1,6) + random.randint(1,6)
         tiles = []
         for row in self.game_state.board.tile_array:
@@ -181,6 +196,14 @@ class GameEngine:
         return roll
 
     def update_vps(self):
+        '''
+        This updates the player victory points.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         longest_road = (None, 0)
         for player in self.game_state.player_array:
             player.vps = 0

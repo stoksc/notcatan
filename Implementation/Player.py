@@ -20,6 +20,14 @@ class Player:
         self.inventory = Inventory.Inventory()
 
     def longest_road(self):
+        '''
+        Finds the length of the player's longest road.
+
+        Args:
+            None
+        Returns:
+            int
+        '''
         lr = 0
         for road in self.inventory.roads:
             rl = self.road_length(road, [])
@@ -28,6 +36,14 @@ class Player:
         return lr
 
     def road_length(self, road, visited_roads):
+        '''
+        Finds the longest road that can be made by following the passed road segment.
+
+        Args:
+            Road, [Road] (initially [])
+        Returns:
+            int
+        '''
         visited_roads.append(road)
         roads_to_visit = []
         for edge in road.edge.edge_arr:

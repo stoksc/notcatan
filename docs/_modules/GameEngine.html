@@ -161,7 +161,6 @@
 <span class="sd">        The Game_Engine uses this method in order to instantiate the object that the build() method has determined as</span>
 <span class="sd">        the valid object to instantiate after previous checks, check_location() and player_inventory() methods, have</span>
 <span class="sd">        returned a True boolean value.</span>
-
 <span class="sd">        Args:</span>
 <span class="sd">            object_to_build_on (object): An object argument that is passed to this method to determine which object that</span>
 <span class="sd">            the build() method, that invoked this method, is attempting to instantiate.</span>
@@ -195,10 +194,26 @@
             <span class="k">return</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="GameEngine.next_player"><a class="viewcode-back" href="../GameEngine.html#GameEngine.GameEngine.next_player">[docs]</a>    <span class="k">def</span> <span class="nf">next_player</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This increments the current_player_number mod 6 and the current_player.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span><span class="o">.</span><span class="n">current_player_number</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game_state</span><span class="o">.</span><span class="n">current_player_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">Constants</span><span class="o">.</span><span class="n">NUMBER_OF_CLIENTS</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span><span class="o">.</span><span class="n">current_player</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span><span class="o">.</span><span class="n">player_array</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">game_state</span><span class="o">.</span><span class="n">current_player_number</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="GameEngine.dice_roll"><a class="viewcode-back" href="../GameEngine.html#GameEngine.GameEngine.dice_roll">[docs]</a>    <span class="k">def</span> <span class="nf">dice_roll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This rolls the dice and updates player inventories accordingly.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">roll</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
         <span class="n">tiles</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span><span class="o">.</span><span class="n">board</span><span class="o">.</span><span class="n">tile_array</span><span class="p">:</span>
@@ -222,6 +237,14 @@
         <span class="k">return</span> <span class="n">roll</span></div>
 
 <div class="viewcode-block" id="GameEngine.update_vps"><a class="viewcode-back" href="../GameEngine.html#GameEngine.GameEngine.update_vps">[docs]</a>    <span class="k">def</span> <span class="nf">update_vps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This updates the player victory points.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">longest_road</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span><span class="o">.</span><span class="n">player_array</span><span class="p">:</span>
             <span class="n">player</span><span class="o">.</span><span class="n">vps</span> <span class="o">=</span> <span class="mi">0</span>

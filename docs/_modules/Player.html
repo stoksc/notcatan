@@ -61,6 +61,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span> <span class="o">=</span> <span class="n">Inventory</span><span class="o">.</span><span class="n">Inventory</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Player.longest_road"><a class="viewcode-back" href="../Player.html#Player.Player.longest_road">[docs]</a>    <span class="k">def</span> <span class="nf">longest_road</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Finds the length of the player&#39;s longest road.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">lr</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">road</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">roads</span><span class="p">:</span>
             <span class="n">rl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">road_length</span><span class="p">(</span><span class="n">road</span><span class="p">,</span> <span class="p">[])</span>
@@ -69,6 +77,14 @@
         <span class="k">return</span> <span class="n">lr</span></div>
 
 <div class="viewcode-block" id="Player.road_length"><a class="viewcode-back" href="../Player.html#Player.Player.road_length">[docs]</a>    <span class="k">def</span> <span class="nf">road_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">road</span><span class="p">,</span> <span class="n">visited_roads</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Finds the longest road that can be made by following the passed road segment.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Road, [Road] (initially [])</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">visited_roads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">road</span><span class="p">)</span>
         <span class="n">roads_to_visit</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">road</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">edge_arr</span><span class="p">:</span>

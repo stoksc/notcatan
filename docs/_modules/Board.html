@@ -65,6 +65,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">connect_vertices_to_vertices</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Board.connect_tiles"><a class="viewcode-back" href="../Board.html#Board.Board.connect_tiles">[docs]</a>    <span class="k">def</span> <span class="nf">connect_tiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Creates a catan-structured graph from self.tile_array by connecting tiles to tiles.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tile_array</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">tile</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
@@ -99,6 +107,14 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">tile_array</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tile_arr</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">tile</span></div>
 
 <div class="viewcode-block" id="Board.add_edges"><a class="viewcode-back" href="../Board.html#Board.Board.add_edges">[docs]</a>    <span class="k">def</span> <span class="nf">add_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Adds edges to all the tiles and sets up tiles to share edges that they should.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tile_array</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">edge</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tile</span><span class="o">.</span><span class="n">edge_arr</span><span class="p">):</span>
@@ -113,6 +129,14 @@
                             <span class="n">edge</span><span class="o">.</span><span class="n">tile_arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tile</span><span class="o">.</span><span class="n">tile_arr</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Board.add_vertices"><a class="viewcode-back" href="../Board.html#Board.Board.add_vertices">[docs]</a>    <span class="k">def</span> <span class="nf">add_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Adds vertices to all the tiles that are correctly shared by neighboring tiles.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tile_array</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tile</span><span class="o">.</span><span class="n">vertex_arr</span><span class="p">):</span>
@@ -131,6 +155,14 @@
 
 
 <div class="viewcode-block" id="Board.connect_edges_to_edges"><a class="viewcode-back" href="../Board.html#Board.Board.connect_edges_to_edges">[docs]</a>    <span class="k">def</span> <span class="nf">connect_edges_to_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Points edges as their neighboring edges for simpler implementation of longest road calculations and more.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tile_array</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">edge</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tile</span><span class="o">.</span><span class="n">edge_arr</span><span class="p">):</span>
@@ -149,6 +181,14 @@
                         <span class="n">edge</span><span class="o">.</span><span class="n">edge_arr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">tile</span><span class="o">.</span><span class="n">tile_arr</span><span class="p">[</span><span class="n">cw_neighbor_index</span><span class="p">]</span><span class="o">.</span><span class="n">edge_arr</span><span class="p">[(</span><span class="n">cw_neighbor_index</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Board.connect_vertices_to_vertices"><a class="viewcode-back" href="../Board.html#Board.Board.connect_vertices_to_vertices">[docs]</a>    <span class="k">def</span> <span class="nf">connect_vertices_to_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Points vertices at neighboring vertices for simpler calculations of invalid vertices and more.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tile_array</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tile</span><span class="o">.</span><span class="n">vertex_arr</span><span class="p">):</span>
@@ -158,6 +198,14 @@
                         <span class="n">vertex</span><span class="o">.</span><span class="n">adj_vertices</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tile</span><span class="o">.</span><span class="n">tile_arr</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">vertex_arr</span><span class="p">[(</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">])</span></div>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Prints a sort of topologically accurate catan board to the command line (for testing ease).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tile_array</span><span class="p">):</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">4</span><span class="p">):</span>
@@ -170,6 +218,14 @@
 
 
 <div class="viewcode-block" id="Board.is_valid_coordinate"><a class="viewcode-back" href="../Board.html#Board.Board.is_valid_coordinate">[docs]</a>    <span class="k">def</span> <span class="nf">is_valid_coordinate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns true if a tile coord, (x, y), is within range, false if not.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            int, int</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tile_array</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
             <span class="k">return</span> <span class="kc">True</span>

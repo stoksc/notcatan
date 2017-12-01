@@ -18,15 +18,39 @@ class ClientControl():
         threading.Thread(target=self.rec_data, args=()).start()
 
     def send_build_obj(self, msg):
+        '''
+        This sends a message to the connected host encoded as utf-8.
+
+        Args:
+            String
+        Returns:
+            None
+        '''
         #send data
         byte_msg = msg.encode('utf-8')
         self.sock.sendall(byte_msg)
 
     def rec_data(self):
+        '''
+        This receives a message from the host and decodes it as utf-8.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         while True:
             self.requests.put(self.sock.recv(1024).decode('utf-8'))
 
     def close(self):
+        '''
+        This closes the connection to the host.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         print("closing socket")
         self.sock.close()
         print("closing application")

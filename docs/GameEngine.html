@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="GameEngineTestingSuite module" href="GameEngineTestingSuite.html" />
+    <link rel="next" title="GameState module" href="GameState.html" />
     <link rel="prev" title="GUI_tile module" href="GUI_tile.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -69,11 +69,12 @@ False (bool): Returns a False boolean value if the game_state was not modified f
 <code class="descname">build_item</code><span class="sig-paren">(</span><em>object_to_build_on</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine.build_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine.build_item" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Game_Engine uses this method in order to instantiate the object that the build() method has determined as
 the valid object to instantiate after previous checks, check_location() and player_inventory() methods, have
-returned a True boolean value.</p>
+returned a True boolean value.
+Args:</p>
+<blockquote>
+<div>object_to_build_on (object): An object argument that is passed to this method to determine which object that
+the build() method, that invoked this method, is attempting to instantiate.</div></blockquote>
 <dl class="docutils">
-<dt>Args:</dt>
-<dd>object_to_build_on (object): An object argument that is passed to this method to determine which object that
-the build() method, that invoked this method, is attempting to instantiate.</dd>
 <dt>Returns:</dt>
 <dd>None</dd>
 </dl>
@@ -117,17 +118,38 @@ to instantiate the type of object the build() method is attempting to instantiat
 <dl class="method">
 <dt id="GameEngine.GameEngine.dice_roll">
 <code class="descname">dice_roll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine.dice_roll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine.dice_roll" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This rolls the dice and updates player inventories accordingly.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="GameEngine.GameEngine.next_player">
 <code class="descname">next_player</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine.next_player"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine.next_player" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This increments the current_player_number mod 6 and the current_player.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="GameEngine.GameEngine.update_vps">
 <code class="descname">update_vps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GameEngine.html#GameEngine.update_vps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#GameEngine.GameEngine.update_vps" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This updates the player victory points.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -143,7 +165,7 @@ to instantiate the type of object the build() method is attempting to instantiat
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="GUI_tile.html" title="previous chapter">GUI_tile module</a></li>
-      <li>Next: <a href="GameEngineTestingSuite.html" title="next chapter">GameEngineTestingSuite module</a></li>
+      <li>Next: <a href="GameState.html" title="next chapter">GameState module</a></li>
   </ul></li>
 </ul>
 </div>

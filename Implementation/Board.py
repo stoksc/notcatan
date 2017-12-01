@@ -24,6 +24,14 @@ class Board:
         self.connect_vertices_to_vertices()
 
     def connect_tiles(self):
+        '''
+        Creates a catan-structured graph from self.tile_array by connecting tiles to tiles.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         for i, row in enumerate(self.tile_array):
             for j, tile in enumerate(row):
                 if i <= 1:
@@ -58,6 +66,14 @@ class Board:
                         self.tile_array[i][j + 1].tile_arr[4] = tile
 
     def add_edges(self):
+        '''
+        Adds edges to all the tiles and sets up tiles to share edges that they should.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         for row in self.tile_array:
             for tile in row:
                 for index, edge in enumerate(tile.edge_arr):
@@ -72,6 +88,14 @@ class Board:
                             edge.tile_arr[1] = tile.tile_arr[index]
 
     def add_vertices(self):
+        '''
+        Adds vertices to all the tiles that are correctly shared by neighboring tiles.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         for row in self.tile_array:
             for tile in row:
                 for index, vertex in enumerate(tile.vertex_arr):
@@ -90,6 +114,14 @@ class Board:
 
 
     def connect_edges_to_edges(self):
+        '''
+        Points edges as their neighboring edges for simpler implementation of longest road calculations and more.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         for row in self.tile_array:
             for tile in row:
                 for index, edge in enumerate(tile.edge_arr):
@@ -108,6 +140,14 @@ class Board:
                         edge.edge_arr[2] = tile.tile_arr[cw_neighbor_index].edge_arr[(cw_neighbor_index - 2) % 6]
 
     def connect_vertices_to_vertices(self):
+        '''
+        Points vertices at neighboring vertices for simpler calculations of invalid vertices and more.
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         for row in self.tile_array:
             for tile in row:
                 for index, vertex in enumerate(tile.vertex_arr):
@@ -117,6 +157,14 @@ class Board:
                         vertex.adj_vertices.add(tile.tile_arr[index].vertex_arr[(index - 1) % 6])
 
     def __repr__(self):
+        '''
+        Prints a sort of topologically accurate catan board to the command line (for testing ease).
+
+        Args:
+            None
+        Returns:
+            None
+        '''
         r = ""
         for index, row in enumerate(self.tile_array):
             if (index == 0 or index == 4):
@@ -129,6 +177,14 @@ class Board:
 
 
     def is_valid_coordinate(self, x, y):
+        '''
+        Returns true if a tile coord, (x, y), is within range, false if not.
+
+        Args:
+            int, int
+        Returns:
+            bool
+        '''
         try:
             self.tile_array[x][y]
             return True

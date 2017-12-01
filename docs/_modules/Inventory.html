@@ -67,11 +67,27 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dev_cards</span> <span class="o">=</span> <span class="p">[]</span>
 
 <div class="viewcode-block" id="Inventory.add_road"><a class="viewcode-back" href="../Inventory.html#Inventory.Inventory.add_road">[docs]</a>    <span class="k">def</span> <span class="nf">add_road</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">road</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Adds the passed road to the player inventory and removes the resources.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Road</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">brick</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lumber</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">roads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">road</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Inventory.add_settlement"><a class="viewcode-back" href="../Inventory.html#Inventory.Inventory.add_settlement">[docs]</a>    <span class="k">def</span> <span class="nf">add_settlement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settlement</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Adds the passed settlement to the player inventory and removes the resources.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Settlement</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">brick</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lumber</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wool</span> <span class="o">-=</span> <span class="mi">1</span>
@@ -79,23 +95,55 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">settlements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">settlement</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Inventory.add_city"><a class="viewcode-back" href="../Inventory.html#Inventory.Inventory.add_city">[docs]</a>    <span class="k">def</span> <span class="nf">add_city</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">city</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Adds the passed city to the player inventory and removes the resources.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            City</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">grain</span> <span class="o">-=</span> <span class="mi">2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ore</span> <span class="o">-=</span> <span class="mi">3</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">city</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Inventory.add_dev_card"><a class="viewcode-back" href="../Inventory.html#Inventory.Inventory.add_dev_card">[docs]</a>    <span class="k">def</span> <span class="nf">add_dev_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dev_card</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Adds the passed dev_card to the player inventory and removes the resources.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            DevelopmentCard</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wool</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">grain</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ore</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dev_cards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dev_card</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Inventory.has_road"><a class="viewcode-back" href="../Inventory.html#Inventory.Inventory.has_road">[docs]</a>    <span class="k">def</span> <span class="nf">has_road</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Checks if the player has the resources to build a road.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">brick</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">lumber</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">roads</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">Constants</span><span class="o">.</span><span class="n">MAX_ROADS</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Inventory.has_settlement"><a class="viewcode-back" href="../Inventory.html#Inventory.Inventory.has_settlement">[docs]</a>    <span class="k">def</span> <span class="nf">has_settlement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Checks if the player has the resources to build a settlement.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">brick</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">lumber</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">wool</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">grain</span> <span class="o">&gt;=</span> <span class="mi">1</span>\
                 <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settlements</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">Constants</span><span class="o">.</span><span class="n">MAX_SETTLEMENTS</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
@@ -103,12 +151,28 @@
             <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Inventory.has_city"><a class="viewcode-back" href="../Inventory.html#Inventory.Inventory.has_city">[docs]</a>    <span class="k">def</span> <span class="nf">has_city</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Checks if the player has the resources to build a city.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grain</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ore</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cities</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">Constants</span><span class="o">.</span><span class="n">MAX_CITIES</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Inventory.has_dev_card"><a class="viewcode-back" href="../Inventory.html#Inventory.Inventory.has_dev_card">[docs]</a>    <span class="k">def</span> <span class="nf">has_dev_card</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Checks if the player has the resources to build a dev card.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wool</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">grain</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ore</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>

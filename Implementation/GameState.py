@@ -19,8 +19,7 @@ class GameState:
         in Game_Engine from player input for this Game_State to be initialized.
 
         Args:
-            player_array ([Player]): An array of the Player class argument that is passed to this method to properly
-            initialize the Game_State.
+            player_array ([Player]): An array of the Player class argument that is passed to this method to properly initialize the Game_State.
         Returns:
             None
         """
@@ -38,6 +37,7 @@ class GameState:
     def initial_setup(self):
         """
         This method sets the tile types and values for the default setup.
+
         Args:
             None.
         Returns:
@@ -102,8 +102,7 @@ class GameState:
         The Game_State uses this method to add a set of invalid vertices to the invalid vertices array.
 
         Args:
-            vertex (Vertex): The vertex used to find the set of invalid vertices to add to the invalid_vertices_to_
-            build_array.
+            vertex (Vertex): The vertex used to find the set of invalid vertices to add to the invalid_vertices_to_build_array.
         Returns:
             None
         """
@@ -117,12 +116,10 @@ class GameState:
 
     def vertex_check(self, vertex):
         """
-        The Game_State uses this method to check whether or not the vertex passed exists in the invalid_vertices_to_
-        build_array.
+        The Game_State uses this method to check whether or not the vertex passed exists in the invalid_vertices_to_build_array.
 
         Args:
             vertex (Vertex): The vertex passed to check
-
         Returns:
             bool: if the vertex is in the invalid_vertices_to_build_array, returns False; else True.
         """
@@ -134,6 +131,14 @@ class GameState:
             return False
 
     def has_connected_road(self, vertex):
+        '''
+        This checks if the passed vertex has a neighbor edge with a road owner by self.current_player.
+
+        Args:
+            Vertex
+        Returns:
+            bool
+        '''
         for tile in vertex.tile_arr:
             if tile != None:
                 vertex_index = tile.vertex_arr.index(vertex)
@@ -148,6 +153,14 @@ class GameState:
         return False
 
     def not_on_opp_sett(self, edge):
+        '''
+        This checks if the passed edge is neighboring a vertex with an opponent build settlement.
+
+        Args:
+            Edge
+        Returns:
+            bool
+        '''
         for tile in edge.tile_arr:
             if tile != None:
                 t1 = tile
@@ -163,6 +176,14 @@ class GameState:
         return True
 
     def road_has_connected_road(self, edge):
+        '''
+        This checks if the edge passed has a neighboring edge with a road owned by self.current_player.
+
+        Args:
+            Edge
+        Returns:
+            None
+        '''
         for edge in edge.edge_arr:
             if (edge != None) and (edge.road != None) and (edge.road.owner != None) and (edge.road.owner == self.current_player):
                 return True

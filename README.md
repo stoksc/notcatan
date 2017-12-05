@@ -3,7 +3,7 @@ Project for Software Engineering at CSU; undeveloped knockoff of the classic Set
 
 ## Getting Started
 
-To view our docs, go [here](https://stoksc.github.io/notcatan/).
+To read our documentation, go [here](https://stoksc.github.io/notcatan/).
 
 #### If you want, for some odd reason, to run this on your machine, here's how:
 1. Make sure you have a Python3 environment with pygame package installed.
